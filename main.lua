@@ -2,19 +2,16 @@ pprint = require 'lib.pprint'
 require 'lib.helpers.core_funcs'
 require 'lib.ECFS'
 require 'lib.load_all_scripts'
-local handling = require 'lib.UI.handling'
+local state = require 'lib.UI.handling'
 require 'lib.UI.ui_data_state'
-core.events = require 'lib.event_handling.events'
 function addStates()
     print( scripts.states.testPage())
-    handling.addState("menu", scripts.states.testPage())
-    handling.addState("subMenu", {prevState= "menu"})
-    UIDATASTATE.PUT({"a", "b"}, 3)
+    state.addState("subMenu", scripts.states.testPage())
+    state.addState("base_map_state", scripts.states.base_map_state())
 end
 function love.load()
     require 'scripts'
     addStates()
-<<<<<<< HEAD
     local station_1, i1 = scripts.entities.station(50,100, "west", 3, 3)
     local station_2, i2 = scripts.entities.station(350,400, "centraal", 3, 3)
     local station_3, i3 = scripts.entities.station(650,100, "oost", 3, 3)
@@ -36,37 +33,35 @@ function love.load()
     local train, t1  = scripts.entities.train(line_id, 1)
     core.entity.add(train)
 
+    local train, t1  = scripts.entities.train(line_id, 3)
+    core.entity.add(train)
     local spotter = scripts.entities.spotter(i1, 1, scripts.entities.actions.in_metro(t1))
     core.entity.add(spotter)
     scripts.systems.simulate.move_trains()
-    scripts.systems.simulate.move_trains()
-    scripts.systems.simulate.move_trains()
-    scripts.systems.simulate.move_trains()
-    scripts.systems.simulate.move_trains()
-    scripts.systems.simulate.move_trains()
-=======
-    core.system.add(scripts.systems.collision.collision())
->>>>>>> origin/master
+    scripts.render.actions.add(5, scripts.render.renderActions.moveMetro())
+    scripts.render.actions.switch()
+
 end
 
 function love.update(dt)
-    core.events.loop(dt)
-    handling.update(dt)
+    require("lib.lovebird").update()
+    state.update(dt)
+    scripts.render.actions.update(dt)
 end
 
 function love.draw()
-<<<<<<< HEAD
     state.draw()
-    core.run("station", scripts.render.station)
-    core.run("route", scripts.render.route)
-=======
-    handling.draw()
->>>>>>> origin/master
+    scripts.render.actions.draw(dt)
+    curve = love.math.newBezierCurve({25,25,75,50,125,25})
+        love.graphics.line(curve:render())
 end
 
 function love.mousepressed( x, y, button )
-    handling.mousePressed(x,y, button)
+    state.mousePressed(x,y, button)
+end
+function love.mousereleased(x,y, button)
+    state.mousereleased(x,y,button)
 end
 function love.keypressed( key, scancode, isrepeat )
-    handling.keypressed( key, scancode, isrepeat )
+    state.keypressed( key, scancode, isrepeat )
 end

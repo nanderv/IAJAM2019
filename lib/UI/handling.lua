@@ -112,6 +112,24 @@ state.mousePressedState = function(stateName, x, y, button, istouch, presses)
     end
 end
 
+state.mouseReleasedState = function(stateName, x, y, button, istouch, presses)
+    local myState = state.UIStates[stateName]
+    if myState.prevState then
+        state.mousePressedState(myState.prevState, x, y, button, istouch, presses)
+    end
+
+    if myState and myState.onClick then
+        myState.mouseReleased(x, y, button, istouch, presses)
+    end
+    if myState.elements then
+        for k, v in ipairs(myState.elements) do
+            if v.mouseReleased then
+                v.mouseReleased(x, y, button, istouch, presses)
+            end
+        end
+    end
+end
+
 state.mousePressed = function(x, y, button, istouch, presses)
     state.mousePressedState(state.currentState, x, y, button, istouch, presses)
 end

@@ -11,7 +11,6 @@ core.removeHandler = function(handler)
     handlers[handler.id] = nil
 end
 core.findHandlerFromSublist = function(name, h)
-    pprint(h)
     if h.name == name then
         return h
     end

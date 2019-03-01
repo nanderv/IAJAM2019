@@ -16,3 +16,10 @@ function GET(i)
     end
     error("Cannot find object " .. tostring(i))
 end
+
+function TRAINGETFROMTO(train_id)
+    local train = GET(train_id)
+    local line = GET(train.line)
+    local route_ID = line.routes[train.route_count]
+    return  GET(route_ID).from,  GET(route_ID).to
+end

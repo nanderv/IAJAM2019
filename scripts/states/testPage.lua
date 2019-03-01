@@ -8,18 +8,14 @@
 local sq = require "lib.UI.square"
 return function()
     return {
-        draw = function() end,
+        draw = function()
+        end,
         selected = nil,
         enter = function() end,
         leave = function() end,
-        elements = {
-            sq(10, 10, 100, 100, function() core.events.add(scripts.events.printEvent("HI")) end)
-        },
-        systems = {
-            "collision",
-        },
         update = function()
 
-        end
+        end,
+        prevState="base_map_state"
     }
 end

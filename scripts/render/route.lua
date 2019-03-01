@@ -9,7 +9,6 @@
 return function(route)
     local from = GET(route.from)
     local to = GET(route.to)
-    pprint(route)
 
     love.graphics.line(from.position.x, from.position.y, to.position.x, to.position.y)
 end

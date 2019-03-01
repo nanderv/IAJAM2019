@@ -12,26 +12,35 @@ local newSteps = {}
 
 local counter = 1
 renderer.add  = function(dt, funct)
-     newSteps[#newSteps + 1] = {timeLeft = dt, funct = funct}
+     newSteps[#newSteps + 1] = {otime = dt, timeLeft = dt, funct = funct}
+end
+
+renderer.switch = function()
+    counter = 1
+    steps = newSteps
+    newSteps = {}
 end
 renderer.update = function(dt)
     local step = steps[counter]
+    if not step then
+        scripts.systems.simulate.move_trains()
+        scripts.render.actions.add(5, scripts.render.renderActions.moveMetro())
+        renderer.switch()
+        return false
+    end
     step.timeLeft = step.timeLeft - dt
 
     if step.timeLeft < 0 then
         counter = counter + 1
     end
 
-    if(counter > #steps) then
-        counter = 1
-        steps = newSteps
 
-        return true
-    end
-
-    return false
+    return true
 end
 renderer.draw = function()
+
+    if not steps[counter] then return end
+
     steps[counter].funct(steps[counter])
 end
 return renderer
