@@ -2,16 +2,19 @@ pprint = require 'lib.pprint'
 require 'lib.helpers.core_funcs'
 require 'lib.ECFS'
 require 'lib.load_all_scripts'
-local state = require 'lib.UI.state'
-
+local handling = require 'lib.UI.handling'
+require 'lib.UI.ui_data_state'
+core.events = require 'lib.event_handling.events'
 function addStates()
     print( scripts.states.testPage())
-    state.addState("menu", scripts.states.testPage())
-    state.addState("subMenu", {prevState= "menu"})
+    handling.addState("menu", scripts.states.testPage())
+    handling.addState("subMenu", {prevState= "menu"})
+    UIDATASTATE.PUT({"a", "b"}, 3)
 end
 function love.load()
     require 'scripts'
     addStates()
+<<<<<<< HEAD
     local station_1, i1 = scripts.entities.station(50,100, "west", 3, 3)
     local station_2, i2 = scripts.entities.station(350,400, "centraal", 3, 3)
     local station_3, i3 = scripts.entities.station(650,100, "oost", 3, 3)
@@ -41,21 +44,29 @@ function love.load()
     scripts.systems.simulate.move_trains()
     scripts.systems.simulate.move_trains()
     scripts.systems.simulate.move_trains()
+=======
+    core.system.add(scripts.systems.collision.collision())
+>>>>>>> origin/master
 end
 
 function love.update(dt)
-    state.update(dt)
+    core.events.loop(dt)
+    handling.update(dt)
 end
 
 function love.draw()
+<<<<<<< HEAD
     state.draw()
     core.run("station", scripts.render.station)
     core.run("route", scripts.render.route)
+=======
+    handling.draw()
+>>>>>>> origin/master
 end
 
 function love.mousepressed( x, y, button )
-    state.mousePressed(x,y, button)
+    handling.mousePressed(x,y, button)
 end
 function love.keypressed( key, scancode, isrepeat )
-    state.keypressed( key, scancode, isrepeat )
+    handling.keypressed( key, scancode, isrepeat )
 end

@@ -6,11 +6,12 @@ core.system.unregisters = {}
 local registers = core.system.registers
 local unregisters = core.system.unregisters
 core.systems = {}
+core.systems_named = {}
 core.system.add = function(system)
 
     -- Add functionality of system to respected lists
     core.systems[system] = system
-
+    core.systems_named[system.name] = system
     -- Add system to register lists
 
     if system.registers then
@@ -18,8 +19,8 @@ core.system.add = function(system)
         for k, v in pairs(system.registers) do
             registers[k] = registers[k] or {}
             registers[k][system] = system
-            if E[k] then
-                for _, w in pairs(E[k]) do
+            if F[k] then
+                for _, w in pairs(F[k]) do
                     system.registers[k](w)
                 end
             end
@@ -40,13 +41,14 @@ end
 
 
 core.system.remove = function(system)
+    core.systems_named[system.name] = nil
 
     for k, _ in pairs(system.registers) do
         registers[k][system] = nil
     end
     for k, _ in pairs(system.unregisters) do
-        if E[k] then
-            for _, w in pairs(E[k]) do
+        if F[k] then
+            for _, w in pairs(F[k]) do
                 system.unregisters[k](w)
             end
         end
