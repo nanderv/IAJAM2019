@@ -12,5 +12,6 @@ a("playerCharacter", {"isPlayer"})
 a("pcOnStation", {"_playerCharacter", "-action.inMetro"})
 a("pawn", {"isPiece"})
 a("policeOnStation", {"_police", "-action.inMetro"})
+a("policeInMetro", {"_police", "action.inMetro"})
 
 a("inMetro", {"_pawn", "action.inMetro"})
