@@ -28,7 +28,7 @@ return function(train)
     end
     love.graphics.setColor(1,1,1)
 
-    for k, v in pairs(F.pcInMetro) do
+    for k, v in pairs(F.inMetro) do
         if v.action.train == train.ID then
             local x, y = GETMETROSPOT(GET(v.action.train), v.spot)
             love.graphics.circle("fill", x, y, 10)

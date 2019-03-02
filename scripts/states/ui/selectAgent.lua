@@ -8,6 +8,7 @@
 
 local findAgent = function(x, y)
     local x, y = CAM:toWorld(x, y)
+
     for k, v in pairs(F.pcInMetro) do
         -- print(v.train)
 
@@ -19,7 +20,6 @@ local findAgent = function(x, y)
         end
     end
     for k, v in pairs(F.pcOnStation) do
-        print(v.station, v.spot)
         local xx, yy = GETSPOT(GET(v.station), v.spot)
         xx, yy = xx - x, yy - y
 
@@ -28,7 +28,46 @@ local findAgent = function(x, y)
         end
     end
 end
+local findSpot = function(x, y, agent)
+    if findAgent(x, y) then return end
+    local x, y = CAM:toWorld(x, y)
 
+    for k, v in pairs(F.inMetro) do
+
+        local xx, yy = GETMETROSPOT(GET(v.action.train), v.spot)
+        xx, yy = xx - x, yy - y
+        print(xx, yy, v.isPolice)
+        if math.sqrt(xx * xx + yy * yy) < 10 then
+            return
+        end
+    end
+
+
+    local v = GET(agent.station)
+    for i = 1, v.playerCapacity do
+        local xx, yy = GETSPOT(v, i)
+        print(xx, yy, x, y)
+        xx, yy = xx - x, yy - y
+
+        if math.sqrt(xx * xx + yy * yy) < 10 then
+            return 'station', v, i
+        end
+    end
+
+
+
+    for k, v in pairs(F.train) do
+        -- print(v.train)
+        for i = 1, 3 do
+            local xx, yy = GETMETROSPOT(v, i)
+            xx, yy = xx - x, yy - y
+
+            if math.sqrt(xx * xx + yy * yy) < 10 then
+                return 'metro', v, i
+            end
+        end
+    end
+end
 return function()
     return {
         mousePressed = function(x, y, button)
@@ -36,6 +75,20 @@ return function()
                 local agent = findAgent(x, y)
                 if agent then
                     UIDATASTATE.PUT({ "agent" }, agent)
+                end
+            elseif button == 2 then
+                local agent = UIDATASTATE.GET({ "agent" })
+                if not agent then return
+                end
+                local type, thing, spot = findSpot(x, y, agent)
+                if type == 'station' then
+                    agent.action = { 'act' }
+                    agent.spot = spot
+                    core.filter.update(agent)
+                elseif type == 'metro' then
+                    agent.action = scripts.entities.actions.in_metro(thing.ID)
+                    agent.spot = spot
+                    core.filter.update(agent)
                 end
             end
         end,
@@ -49,9 +102,9 @@ return function()
                     xx, yy = GETSPOT(GET(agent.station), agent.spot)
                 end
                 CAM:draw(function()
-                love.graphics.setColor(1, 0, 0)
-                love.graphics.circle('line', xx, yy, 11)
-                love.graphics.setColor(1, 1, 1)
+                    love.graphics.setColor(1, 0, 0)
+                    love.graphics.circle('line', xx, yy, 11)
+                    love.graphics.setColor(1, 1, 1)
                 end)
             end
         end

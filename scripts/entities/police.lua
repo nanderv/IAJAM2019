@@ -14,6 +14,7 @@ return function(station, action)
         isPiece = "police",
         station = station,
         action = action,
+        spot = spot or 1,
         ID = scum_ID,
     }, scum_ID
 

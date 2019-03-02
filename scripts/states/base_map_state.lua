@@ -11,13 +11,12 @@ return function()
     return {
         draw = function()
             -- draw map background etc.
-            CAM:draw(function(l,t,w,h)
+            CAM:draw(function(l, t, w, h)
                 -- draw camera stuff here
                 core.run("station", scripts.render.station)
                 core.run("route", scripts.render.route)
                 core.run("station", scripts.render.render_characters)
             end)
-
         end,
         update = function(dt)
             local opos = UIDATASTATE.GET({ "mouse", ".scrolling" })
@@ -28,9 +27,8 @@ return function()
                 local xn, yn = xx.x + math.floor((x - opos.x) * xx.zoom), xx.y + math.floor((y - opos.y) * xx.zoom)
 
                 CAM:setPosition(xn, yn)
-                print()
-                UIDATASTATE.PUT({ "scrol" }, { x = xn, y = yn , zoom=xx.zoom})
-                UIDATASTATE.PUT({ "mouse", ".scrolling" }, { x = x, y = y})
+                UIDATASTATE.PUT({ "scrol" }, { x = xn, y = yn, zoom = xx.zoom })
+                UIDATASTATE.PUT({ "mouse", ".scrolling" }, { x = x, y = y })
             end
         end,
         selected = nil,
@@ -49,12 +47,13 @@ return function()
                 UIDATASTATE.PUT({ "mouse", ".scrolling" }, { x = x, y = y })
             end
         end,
-        wheelmoved = function(x,y, px, py)
-            local tx, ty =CAM:toWorld(px,py)
+        wheelmoved = function(x, y, px, py)
+            local tx, ty = CAM:toWorld(px, py)
             local scale = math.max(0.5, CAM:getScale() + y / 2)
             CAM:setScale(scale)
-            CAM: setPosition(tx, ty)
-
+            if y > 0 then
+                CAM:setPosition(tx, ty)
+            end
         end
     }
 end
