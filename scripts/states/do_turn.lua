@@ -34,7 +34,6 @@ return function()
         draw = function()
             CAM:draw(function()
                 core.run("train", scripts.render.renderMetro)
-
             end)
         end,
         selected = nil,

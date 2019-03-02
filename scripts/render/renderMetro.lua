@@ -30,8 +30,18 @@ return function(train)
 
     for k, v in pairs(F.inMetro) do
         if v.action.train == train.ID then
+            if v.isPolice then
+
+                if IS_PRESENT(train.station) then
+                    love.graphics.setColor(0,0,1)
+                else
+                    love.graphics.setColor(0,0,0,0)
+                end
+            end
+
             local x, y = GETMETROSPOT(GET(v.action.train), v.spot)
             love.graphics.circle("fill", x, y, 10)
+            love.graphics.setColor(1,1,1, 1)
         end
     end
 end

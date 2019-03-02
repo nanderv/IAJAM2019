@@ -16,7 +16,9 @@ local function arrest(scum)
     scripts.render.actions.add(1, act.draw, act.initialize)
     local act = scripts.render.renderActions.renderArrest(scum)
     scripts.render.actions.add(4, act.draw, act.initialize)
-
+    if UIDATASTATE.GET({ "agent" }) == scum then
+        UIDATASTATE.PUT({ "agent" }, nil)
+    end
     core.entity.remove(scum)
 end
 
@@ -81,13 +83,13 @@ return function()
                         local train = get_metro(v)
                         if train then
                             local slot
-                            local founds = {1,2,3}
+                            local founds = { 1, 2, 3 }
                             for k, v in pairs(F.inMetro) do
                                 if v.action.train == train.ID then
                                     founds[v.spot] = nil
                                 end
                             end
-                            for k,v in pairs(founds) do
+                            for k, v in pairs(founds) do
                                 slot = v
                                 break
                             end
@@ -95,7 +97,6 @@ return function()
                                 v.slot = slot
                                 v.action = scripts.entities.actions.in_metro(train.ID)
                             end
-
                             core.filter.update(v)
                         end
                     end
@@ -116,6 +117,7 @@ return function()
                     v.STATIONCOUNTER = v.STATIONCOUNTER + 1
                     local routeLength = #GET(GET(v.action.train).line).routes
                     if v.STATIONCOUNTER > routeLength then
+
                         core.entity.remove(v)
                     end
                 end
