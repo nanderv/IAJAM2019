@@ -7,7 +7,7 @@
 --
 local function draw(x,y,character)
     love.graphics.setColor(0,0,1)
-    love.graphics.circle('fill', x,y, 10)
+    love.graphics.circle('fill', x,y, 40)
     love.graphics.setColor(1,1,1)
 end
 return function (x, y, count)

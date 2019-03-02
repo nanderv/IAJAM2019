@@ -13,8 +13,9 @@ return function()
             -- draw map background etc.
             CAM:draw(function(l, t, w, h)
                 -- draw camera stuff here
-                core.run("station", scripts.render.station)
                 core.run("route", scripts.render.route)
+
+                core.run("station", scripts.render.station)
                 core.run("station", scripts.render.render_characters)
             end)
         end,

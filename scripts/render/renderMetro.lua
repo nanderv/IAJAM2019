@@ -17,14 +17,14 @@ GETMETROSPOT = function(train, i)
     local xx, yy = (to.x - from.x), (to.y - from.y)
     local len = math.sqrt(xx * xx + yy * yy)
     local xdir, ydir = -xx / len, -yy / len
-    return station.position.x + xdir * 20 * (i + 1), station.position.y + ydir * 20 * (i + 1)
+    return station.position.x + xdir * 80 * (i + 1), station.position.y + ydir * 80 * (i + 1)
 end
 return function(train)
 
     love.graphics.setColor(0.5, 0.5, 0.5)
     for i = 1, 3 do
         local x, y = GETMETROSPOT(train, i)
-        love.graphics.circle("fill", x, y, 10)
+        love.graphics.circle("fill", x, y, 40)
     end
     love.graphics.setColor(1,1,1)
 
@@ -40,7 +40,7 @@ return function(train)
             end
 
             local x, y = GETMETROSPOT(GET(v.action.train), v.spot)
-            love.graphics.circle("fill", x, y, 10)
+            love.graphics.circle("fill", x, y, 40)
             love.graphics.setColor(1,1,1, 1)
         end
     end

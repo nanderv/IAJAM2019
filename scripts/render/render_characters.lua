@@ -6,7 +6,7 @@
 -- To change this template use File | Settings | File Templates.
 --
 function GETSPOT(station, spot)
-    return station.position.x +math.sin(station.angle)* 20*(spot+1), station.position.y + math.cos(station.angle) *  20*(spot+1)
+    return station.position.x +math.sin(station.angle)* 80*(spot+1), station.position.y + math.cos(station.angle) *  80*(spot+1)
 end
 
 -- Renders all characters for this station
@@ -15,7 +15,7 @@ return function(station)
 
     love.graphics.setColor(0.5,0.5,0.5)
     for i=1, station.playerCapacity do
-        love.graphics.circle("fill",station.position.x +math.sin(station.angle)* 20*(i +1), station.position.y + math.cos(station.angle) *  20*(i+1), 10)
+        love.graphics.circle("fill",station.position.x +math.sin(station.angle)* 80*(i +1), station.position.y + math.cos(station.angle) *  80*(i+1), 40)
     end
     love.graphics.setColor(1,1,1)
     for k,v in pairs(F.pcOnStation) do
@@ -31,7 +31,7 @@ return function(station)
             count = count + 1
         end
     end
-    scripts.render.renderPolice(station.position.x +  math.sin(station.angle)*  20*(station.playerCapacity+2), station.position.y +math.cos(station.angle) * 20*(station.playerCapacity+2), count)
+    scripts.render.renderPolice(station.position.x +  math.sin(station.angle)*  80*(station.playerCapacity+2), station.position.y +math.cos(station.angle) * 80*(station.playerCapacity+2), count)
 
 end
 

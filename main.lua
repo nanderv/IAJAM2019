@@ -6,8 +6,27 @@ local state = require 'lib.UI.handling'
 MYSTATE = state
 require 'lib.UI.ui_data_state'
 local gamera = require 'lib.gamera'
-CAM = gamera.new(0,0,4800,4800)
+CAM = gamera.new(0,0,9600,9600)
+
+P = {}
+P.agentSize = 40
+RESOURCES = {}
+local colours = {
+    'r',
+    'y',
+    'g',
+    'c',
+    'b'
+}
+function LOADASSETS()
+    RESOURCES.station = {}
+    for k,v in ipairs(colours) do
+            RESOURCES.station[v] = love.graphics.newImage('assets/processed/s1'..v..'@16x.png')
+    end
+    pprint(RESOURCES)
+end
 function addStates()
+    LOADASSETS()
     print( scripts.states.testPage())
     state.addState("subMenu", scripts.states.testPage())
     state.addState("base_map_state", scripts.states.base_map_state())
@@ -34,6 +53,9 @@ function love.update(dt)
 end
 
 function love.draw()
+    love.graphics.setColor(252/255,233/255,200/255)
+    love.graphics.rectangle("fill", 0,0,10000,10000)
+    love.graphics.setColor(1,1,1)
     state.draw()
 end
 

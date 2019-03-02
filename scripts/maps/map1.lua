@@ -11,17 +11,17 @@ map.name = "tutorial"
 map.description = "explains basic things"
 
 map.generate = function()
-    local station_1, i1 = scripts.entities.station(550, 100, "west", 3, 3)
-    local station_2, i2 = scripts.entities.station(740, 400, "centraal", 3, 3)
-    local station_3, i3 = scripts.entities.station(950, 100, "oost", 3, 3)
+    local station_1, i1 = scripts.entities.station(2000, 200, "west", 3, 3,nil,nil, 'r')
+    local station_2, i2 = scripts.entities.station(2400, 800, "centraal", 3, 3,nil,nil, 'r')
+    local station_3, i3 = scripts.entities.station(3000, 200, "oost", 3, 3,nil,nil, 'r')
 
     core.entity.add(station_1)
     core.entity.add(station_2)
     core.entity.add(station_3)
-    local route_1, r1 = scripts.entities.route(i1, i2, { { x = 740, y = 100 } })
+    local route_1, r1 = scripts.entities.route(i1, i2, { { x = 2400, y = 200 } })
     local route_2, r2 = scripts.entities.route(i2, i3)
     local route_3, r3 = scripts.entities.route(i3, i2)
-    local route_4, r4 = scripts.entities.route(i2, i1, { { x = 740, y = 100 } })
+    local route_4, r4 = scripts.entities.route(i2, i1, { { x = 2400, y = 200 } })
     core.entity.add(route_1)
     core.entity.add(route_2)
     core.entity.add(route_3)

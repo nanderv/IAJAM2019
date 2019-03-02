@@ -15,7 +15,7 @@ local findAgent = function(x, y)
         local xx, yy = GETMETROSPOT(GET(v.action.train), v.spot)
         xx, yy = xx - x, yy - y
 
-        if math.sqrt(xx * xx + yy * yy) < 10 then
+        if math.sqrt(xx * xx + yy * yy) < P.agentSize then
             return v
         end
     end
@@ -23,7 +23,7 @@ local findAgent = function(x, y)
         local xx, yy = GETSPOT(GET(v.station), v.spot)
         xx, yy = xx - x, yy - y
 
-        if math.sqrt(xx * xx + yy * yy) < 10 then
+        if math.sqrt(xx * xx + yy * yy) < P.agentSize  then
             return v
         end
     end
@@ -37,7 +37,7 @@ local findSpot = function(x, y, agent)
         local xx, yy = GETMETROSPOT(GET(v.action.train), v.spot)
         xx, yy = xx - x, yy - y
         print(xx, yy, v.isPolice)
-        if math.sqrt(xx * xx + yy * yy) < 10 then
+        if math.sqrt(xx * xx + yy * yy) < P.agentSize  then
             return
         end
     end
@@ -49,7 +49,7 @@ local findSpot = function(x, y, agent)
         print(xx, yy, x, y)
         xx, yy = xx - x, yy - y
 
-        if math.sqrt(xx * xx + yy * yy) < 10 then
+        if math.sqrt(xx * xx + yy * yy) < P.agentSize  then
             return 'station', v, i
         end
     end
@@ -62,7 +62,7 @@ local findSpot = function(x, y, agent)
             local xx, yy = GETMETROSPOT(v, i)
             xx, yy = xx - x, yy - y
 
-            if math.sqrt(xx * xx + yy * yy) < 10 then
+            if math.sqrt(xx * xx + yy * yy) < P.agentSize  then
                 return 'metro', v, i
             end
         end
@@ -103,7 +103,7 @@ return function()
                 end
                 CAM:draw(function()
                     love.graphics.setColor(1, 0, 0)
-                    love.graphics.circle('line', xx, yy, 11)
+                    love.graphics.circle('line', xx, yy, P.agentSize + 1)
                     love.graphics.setColor(1, 1, 1)
                 end)
             end

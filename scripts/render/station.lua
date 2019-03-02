@@ -7,5 +7,6 @@
 --
 
 return function(station)
-    love.graphics.circle("fill", station.position.x, station.position.y, 30)
+    love.graphics.draw(RESOURCES.station[station.colour], station.position.x, station.position.y, 0, 2, 2, 50, 50)
+
 end
