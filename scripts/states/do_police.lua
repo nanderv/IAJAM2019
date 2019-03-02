@@ -83,7 +83,10 @@ return function()
                         local train = get_metro(v)
                         if train then
                             local slot
-                            local founds = { 1, 2, 3 }
+                            local founds = {}
+                            for i=1, train.capacity do
+                                founds[i] = i
+                            end
                             for k, v in pairs(F.inMetro) do
                                 if v.action.train == train.ID then
                                     founds[v.spot] = nil

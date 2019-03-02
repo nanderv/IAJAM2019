@@ -22,7 +22,7 @@ end
 return function(train)
 
     love.graphics.setColor(0.5, 0.5, 0.5)
-    for i = 1, 3 do
+    for i = 1, train.capacity do
         local x, y = GETMETROSPOT(train, i)
         love.graphics.circle("fill", x, y, 40)
     end

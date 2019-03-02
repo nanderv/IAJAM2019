@@ -60,6 +60,17 @@ local function get_best_scum(station_ID)
 end
 
 local sq = require "lib.UI.square"
+local function newResults() return {
+    arrested = 0,
+    pickpockets = 0,
+    pickpocketsHiding = 0,
+    musicians = 0,
+    musiciansHiding = 0,
+    musicianIncome = 0,
+}
+end
+
+local results  = {}
 return function()
     return {
         draw = function()
@@ -68,21 +79,20 @@ return function()
                 core.run("train", scripts.render.renderMetro)
             end)
             love.graphics.print("Here should be your rendering code for rendering the end-of-turn summary", 400, 400)
-
         end,
         elements = {
             scripts.states.ui.next_turn_button(300, 300),
         },
-
         selected = nil,
         enter = function()
-            -- Do the action for each police officer.
+            -- set all the data
 
         end,
-        leave = function() end,
-
+        leave = function()
+            results= newResults()
+        end,
         mousePressed = function(x, y, button)
-         --   MYSTATE.setState('do_turn')
+            --   MYSTATE.setState('do_turn')
         end,
         prevState = "base_map_state"
     }

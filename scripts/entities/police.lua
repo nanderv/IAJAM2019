@@ -15,6 +15,7 @@ return function(station, action)
         station = station,
         action = action,
         spot = spot or 1,
+        STATIONCOUNTER = 0,
         ID = scum_ID,
     }, scum_ID
 

@@ -54,11 +54,9 @@ local findSpot = function(x, y, agent)
         end
     end
 
-
-
     for k, v in pairs(F.train) do
         -- print(v.train)
-        for i = 1, 3 do
+        for i = 1, v.capacity do
             local xx, yy = GETMETROSPOT(v, i)
             xx, yy = xx - x, yy - y
 

@@ -50,7 +50,7 @@ return function()
         end,
         wheelmoved = function(x, y, px, py)
             local tx, ty = CAM:toWorld(px, py)
-            local scale = math.max(0.5, CAM:getScale() + y / 2)
+            local scale = math.max(0.25, CAM:getScale() + y / 2)
             CAM:setScale(scale)
             if y > 0 then
                 CAM:setPosition(tx, ty)
