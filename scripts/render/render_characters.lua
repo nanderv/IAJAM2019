@@ -5,6 +5,10 @@
 -- Time: 11:58
 -- To change this template use File | Settings | File Templates.
 --
+
+local function renderSocket(x,y)
+
+end
 function GETSPOT(station, spot)
     return station.position.x +math.sin(station.angle)* 80*(spot+1), station.position.y + math.cos(station.angle) *  80*(spot+1)
 end
@@ -13,11 +17,9 @@ end
 return function(station)
     local count = 0
 
-    love.graphics.setColor(0.5,0.5,0.5)
     for i=1, station.playerCapacity do
-        love.graphics.circle("fill",station.position.x +math.sin(station.angle)* 80*(i +1), station.position.y + math.cos(station.angle) *  80*(i+1), 40)
+        love.graphics.draw(RESOURCES.diamond[station.colour],station.position.x +math.sin(station.angle)* 80*(i +1), station.position.y + math.cos(station.angle) *  80*(i+1), station.angle, 2, 2, 10, 10)
     end
-    love.graphics.setColor(1,1,1)
     for k,v in pairs(F.pcOnStation) do
         if v.station == station.ID then
             count = count + 1

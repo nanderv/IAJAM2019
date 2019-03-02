@@ -7,11 +7,12 @@
 --
 
 -- This is a 'basic' line route. More complex routes might be possible (spline-based?)
-return function(from, to, midpoints)
+return function(from, to, midpoints, colour)
     local route_ID = GET_ID()
     return {
         isRoute = true,
         from = from,
+        colour = colour,
         to = to,
         midpoints = midpoints or {},
         ID  = route_ID

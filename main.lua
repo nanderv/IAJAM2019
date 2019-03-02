@@ -6,7 +6,7 @@ local state = require 'lib.UI.handling'
 MYSTATE = state
 require 'lib.UI.ui_data_state'
 local gamera = require 'lib.gamera'
-CAM = gamera.new(0,0,9600,9600)
+CAM = gamera.new(0, 0, 9600, 9600)
 
 P = {}
 P.agentSize = 40
@@ -20,31 +20,48 @@ local colours = {
 }
 function LOADASSETS()
     RESOURCES.station = {}
-    for k,v in ipairs(colours) do
-            RESOURCES.station[v] = love.graphics.newImage('assets/processed/s1'..v..'@16x.png')
+    RESOURCES.diamond = {}
+    RESOURCES.colours = {
+        r = { r = 237, g = 85, b = 59},
+        y = { r = 242, g = 177, b = 52},
+        g = { r = 71, g = 171, b = 108},
+        c = { r = 8, g = 148, b = 161},
+        b = { r = 17, g = 47, b = 65}
+    }
+    for k,v in pairs(RESOURCES.colours) do
+        v.r = v.r / 255
+        v.g = v.g / 255
+        v.b = v.b / 255
+    end
+    for k, v in ipairs(colours) do
+        RESOURCES.station[v] = love.graphics.newImage('assets/processed/s1' .. v .. '@16x.png')
+    end
+    for k, v in ipairs(colours) do
+        RESOURCES.diamond[v] = love.graphics.newImage('assets/processed/x1' .. v .. '@16x.png')
     end
     pprint(RESOURCES)
 end
+
 function addStates()
     LOADASSETS()
-    print( scripts.states.testPage())
+    print(scripts.states.testPage())
     state.addState("subMenu", scripts.states.testPage())
     state.addState("base_map_state", scripts.states.base_map_state())
     state.addState("do_turn", scripts.states.do_turn())
     state.addState("do_moving_metro", scripts.states.do_moving_metro())
+    state.addState("end_turn", scripts.states.end_turn())
     state.addState("do_police", scripts.states.do_police())
     state.addState("load_map", scripts.states.load_map())
-
 end
+
 function love.load()
-    love.graphics.setDefaultFilter( 'nearest', 'nearest' )
+    love.graphics.setDefaultFilter('nearest', 'nearest')
     require 'scripts'
     addStates()
-    UIDATASTATE.PUT({"scrol"}, {x=0, y=0, zoom=1})
-    UIDATASTATE.PUT({"map"}, "map1")
+    UIDATASTATE.PUT({ "scrol" }, { x = 0, y = 0, zoom = 1 })
+    UIDATASTATE.PUT({ "map" }, "map1")
     CAM:setScale(0.01)
     state.setState("load_map")
-
 end
 
 function love.update(dt)
@@ -53,22 +70,24 @@ function love.update(dt)
 end
 
 function love.draw()
-    love.graphics.setColor(252/255,233/255,200/255)
-    love.graphics.rectangle("fill", 0,0,10000,10000)
-    love.graphics.setColor(1,1,1)
+    love.graphics.setColor(252 / 255, 233 / 255, 200 / 255)
+    love.graphics.rectangle("fill", 0, 0, 10000, 10000)
+    love.graphics.setColor(1, 1, 1)
     state.draw()
 end
 
-function love.mousepressed( x, y, button )
-    state.mousePressed(x,y, button)
-end
-function love.mousereleased(x,y, button)
-    state.mouseReleased(x,y,button)
-end
-function love.keypressed( key, scancode, isrepeat )
-    state.keypressed( key, scancode, isrepeat )
+function love.mousepressed(x, y, button)
+    state.mousePressed(x, y, button)
 end
 
-function love.wheelmoved (x,y)
-    state.wheelmoved(x,y)
+function love.mousereleased(x, y, button)
+    state.mouseReleased(x, y, button)
+end
+
+function love.keypressed(key, scancode, isrepeat)
+    state.keypressed(key, scancode, isrepeat)
+end
+
+function love.wheelmoved(x, y)
+    state.wheelmoved(x, y)
 end

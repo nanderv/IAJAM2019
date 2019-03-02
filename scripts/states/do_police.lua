@@ -127,7 +127,7 @@ return function()
         leave = function() end,
         update = function(dt)
             if not scripts.render.actions.update(dt) then
-                MYSTATE.setState('do_turn')
+                MYSTATE.setState('end_turn')
             end
         end,
         mousePressed = function(x, y, button)
