@@ -18,7 +18,7 @@ state.addState = function(name, myState)
 end
 state.setState = function(str)
     if not state.UIStates[str] then
-        error("State " + tostring(str) + " does not exist")
+        error("State "  .. tostring(str) .. " does not exist")
     end
     if state.UIStates[state.currentState] then
         if state.UIStates[state.currentState].leave then
@@ -26,7 +26,7 @@ state.setState = function(str)
         end
     end
     if state.UIStates[str].enter then
-        state.UIStates[str].leave()
+        state.UIStates[str].enter()
     end
     state.currentState = str
 end
@@ -51,21 +51,14 @@ state.drawState = function(stateName)
 end
 
 state.draw = function()
+    print(state.currentState)
     state.drawState(state.currentState)
 end
 
 state.updateState = function(stateName, dt)
     local myState = state.UIStates[stateName]
     if myState.prevState then
-        state.updateState(myState.prevState)
-    end
-    if myState.systems then
-        for k, v in ipairs(myState.systems) do
-            local sys = core.systems_named[v]
-            if not sys.paused or not state.isPaused then
-                sys.update(dt)
-            end
-        end
+        state.updateState(myState.prevState, dt)
     end
 
     if myState and myState.update then
@@ -85,7 +78,7 @@ state.updateState = function(stateName, dt)
 end
 
 state.update = function(dt)
-    state.updateState(state.currentState)
+    state.updateState(state.currentState, dt)
 end
 
 state.keypressed = function(key, scanCode, isRepeat)
@@ -100,7 +93,7 @@ state.mousePressedState = function(stateName, x, y, button, istouch, presses)
         state.mousePressedState(myState.prevState, x, y, button, istouch, presses)
     end
 
-    if myState and myState.onClick then
+    if myState and myState.mousePressed then
         myState.mousePressed(x, y, button, istouch, presses)
     end
     if myState.elements then
@@ -115,10 +108,10 @@ end
 state.mouseReleasedState = function(stateName, x, y, button, istouch, presses)
     local myState = state.UIStates[stateName]
     if myState.prevState then
-        state.mousePressedState(myState.prevState, x, y, button, istouch, presses)
+        state.mouseReleasedState(myState.prevState, x, y, button, istouch, presses)
     end
 
-    if myState and myState.onClick then
+    if myState and myState.mouseReleased then
         myState.mouseReleased(x, y, button, istouch, presses)
     end
     if myState.elements then
@@ -134,7 +127,8 @@ state.mousePressed = function(x, y, button, istouch, presses)
     state.mousePressedState(state.currentState, x, y, button, istouch, presses)
 end
 
-state.mousereleased = function(x, y, button, istouch, presses)
+state.mouseReleased = function(x, y, button, istouch, presses)
+    state.mouseReleasedState(state.currentState, x, y, button, istouch, presses)
 
 end
 return state

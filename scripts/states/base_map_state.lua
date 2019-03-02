@@ -11,32 +11,42 @@ return function()
     return {
         draw = function()
             -- draw map background etc.
-            core.run("station", scripts.render.station)
-            core.run("route", scripts.render.route)
+            CAM:draw(function(l,t,w,h)
+                -- draw camera stuff here
+                core.run("station", scripts.render.station)
+                core.run("route", scripts.render.route)
+            end)
+
         end,
         update = function(dt)
-            local opos = UIDATASTATE.GET({"mouse", ".scrolling"})
+            local opos = UIDATASTATE.GET({ "mouse", ".scrolling" })
             if opos then
-                local x, y = love.mouse.getPosition( )
-                UIState.put({"scroll"}, {x=x- opos.x, y=y-opos.y})
-                UIDATASTATE.PUT({"mouse", ".scrolling"}, {x= x, y= y})
+                local x, y = love.mouse.getPosition()
+                local xx = UIDATASTATE.GET({ "scrol" })
+                xx.x, xx.y = CAM:getPosition()
+                local xn, yn = xx.x + math.floor((x - opos.x) * xx.zoom), xx.y + math.floor((y - opos.y) * xx.zoom)
+
+                CAM:setPosition(xn, yn)
+                print()
+                UIDATASTATE.PUT({ "scrol" }, { x = xn, y = yn , zoom=xx.zoom})
+                UIDATASTATE.PUT({ "mouse", ".scrolling" }, { x = x, y = y})
             end
         end,
         selected = nil,
         enter = function() end,
         leave = function() end,
-        elements = {
-        },
+        elements = {},
         mouseReleased = function(x, y, button, istouch, presses)
-            if(button ==  2) then
+            if (button == 2) then
                 print("RMB up")
-                UIDATASTATE.PUT({"mouse", ".scrolling"}, nil)
+                UIDATASTATE.PUT({ "mouse", ".scrolling" }, nil)
             end
         end,
-        mousepressed = function(x, y, button, istouch, presses)
-            if(button ==  2) then
-                print("RMB")
-                UIDATASTATE.PUT({"mouse", ".scrolling"}, {x= x, y= y})
+        mousePressed = function(x, y, button, istouch, presses)
+            print(button)
+            if (button == 2) then
+                print("RMB down")
+                UIDATASTATE.PUT({ "mouse", ".scrolling" }, { x = x, y = y })
             end
         end
     }
