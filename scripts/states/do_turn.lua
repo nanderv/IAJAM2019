@@ -32,6 +32,10 @@ end
 return function()
     return {
         draw = function()
+            CAM:draw(function()
+                core.run("train", scripts.render.renderMetro)
+
+            end)
         end,
         selected = nil,
         enter = function()
@@ -41,7 +45,6 @@ return function()
         end,
         elements = {
             scripts.states.ui.end_turn_button(300, 300),
-            scripts.states.ui.station_on_click(300, 300)
         },
         mousePressed = function(x, y, button)
             local xx, yy = CAM:toWorld(x, y)

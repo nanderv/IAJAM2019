@@ -7,7 +7,7 @@
 --
 
 
-return function(x, y, name, player_capacity, pauper, dirt)
+return function(x, y, name, player_capacity, pauper, dirt, angle)
     local station_ID = GET_ID()
     return {
         isStation = true,
@@ -16,6 +16,7 @@ return function(x, y, name, player_capacity, pauper, dirt)
         playerCapacity = player_capacity,
         pauper = pauper or 0,
         dirt = dirt or 0,
+        angle = angle or 0.25*math.pi,
         ID = station_ID,
     }, station_ID
 end

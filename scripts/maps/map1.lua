@@ -28,17 +28,17 @@ map.generate = function()
     core.entity.add(route_4)
     local line, line_id = scripts.entities.line({ r1, r2, r3, r4 }, { r = 1, g = 0, b = 0 })
     core.entity.add(line)
-
-    local train, t1 = scripts.entities.train(line_id, 1)
-    core.entity.add(train)
-
-    local train, t1 = scripts.entities.train(line_id, 3)
-    core.entity.add(train)
     local spotter = scripts.entities.spotter(i1, 1, {})
     core.entity.add(spotter)
     local police = scripts.entities.spotter(i2, 2, {})
     core.entity.add(police)
     local police = scripts.entities.spotter(i2, 3, {})
+    --local train, t1 = scripts.entities.train(line_id, 1)
+    --core.entity.add(train)
+
+    local train, t1 = scripts.entities.train(line_id, 3)
+    core.entity.add(train)
+
     core.entity.add(police)
     local police = scripts.entities.police(i2, scripts.entities.actions.in_metro(t1))
     core.entity.add(police)

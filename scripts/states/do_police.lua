@@ -58,6 +58,8 @@ return function()
         draw = function()
             CAM:draw( function()
                 scripts.render.actions.draw()
+                core.run("train", scripts.render.renderMetro)
+
             end)
         end,
         selected = nil,

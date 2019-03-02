@@ -11,7 +11,7 @@ return function(line, route_count)
         isTrain = true,
         line = line,
         route_count = route_count,
-        station = GET(GET(GET(line).routes[route_count]).from).ID,
+        station = GET(GET(GET(line).routes[route_count]).to).ID,
         ID = train_ID,
     }, train_ID
 end

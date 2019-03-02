@@ -36,3 +36,10 @@ function GET_SCREEN_POS(position)
     local camera = UIDATASTATE.GET({'scrol'})
     return {x = position.x - camera.x, y=position.y - camera.y}
 end
+
+function IS_PRESENT(station_ID)
+    for k,v in pairs(F.playerCharacter) do
+        if v.station == station_ID then return true end
+    end
+    return false
+end
