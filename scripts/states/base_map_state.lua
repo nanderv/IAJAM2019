@@ -14,6 +14,7 @@ return function()
             CAM:draw(function(l, t, w, h)
                 -- draw camera stuff here
                 core.run("route", scripts.render.route)
+                core.run("connector", scripts.render.connector)
 
                 core.run("station", scripts.render.station)
                 core.run("station", scripts.render.render_characters)

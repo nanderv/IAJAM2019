@@ -16,13 +16,6 @@
 -- To change this template use File | Settings | File Templates.
 --
 
---
--- Created by IntelliJ IDEA.
--- User: nander
--- Date: 28/02/2019
--- Time: 11:48
--- To change this template use File | Settings | File Templates.
---
 local sq = require "lib.UI.square"
 local dist = function(pos1, pos2)
     local xd = (pos1.x - pos2.x)
@@ -46,8 +39,12 @@ return function()
             scripts.states.ui.end_turn_button(300, 300),
             scripts.states.ui.selectAgent(),
             scripts.states.ui.agentOptions(),
-            scripts.states.ui.add_agent_button(300, 880, 'pickpocket'),
-
+            scripts.states.ui.add_agent_button(100, 1000, 'spotter'),
+            scripts.states.ui.add_agent_button(150, 1000, 'pickpocket'),
+            scripts.states.ui.add_agent_button(200, 1000, 'musician'),
+            scripts.states.ui.add_agent_button(250, 1000, 'graffiti'),
+            scripts.states.ui.add_agent_button(300, 1000, 'bombthreat'),
+            scripts.states.ui.add_agent_button(350, 1000, 'employeet'),
         },
         mousePressed = function(x, y, button)
             local xx, yy = CAM:toWorld(x, y)

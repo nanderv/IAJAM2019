@@ -17,3 +17,5 @@ a("policeOnStation", {"_police", "-action.inMetro"})
 a("policeInMetro", {"_police", "action.inMetro"})
 
 a("inMetro", {"_pawn", "action.inMetro"})
+
+a("connector", {"isConnector"})

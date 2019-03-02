@@ -43,3 +43,14 @@ function IS_PRESENT(station_ID)
     end
     return false
 end
+
+function IS_CONNECTED(station_ID, station2_ID)
+    if station_ID == station2_ID then return true end
+    for k,v in pairs(F.connector) do
+        print("HEREEEEEE ", v.station1, v.station2, station_ID, station2_ID)
+        if (v.station1 == station_ID and v.station2 == station2_ID) or (v.station1 == station2_ID and v.station2 == station_ID) then
+            return true
+        end
+    end
+    return false
+end

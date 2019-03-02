@@ -42,7 +42,18 @@ local function clean(station)
     local act = scripts.render.renderActions.renderCleaning(station)
     scripts.render.actions.add(5, act.draw, act.initialize)
 end
-
+local function get_best_scum_connected(station_ID)
+    local scum
+    local scumScore = 0
+    for k, v in pairs(F.pcOnStation) do
+        local score = scumValues[v.isPiece]
+        if score > scumScore and IS_CONNECTED(v.station, station_ID) then
+            scum = v
+            scumScore = score
+        end
+    end
+    return scum
+end
 local function get_best_scum(station_ID)
     local scum
     local scumScore = 0
@@ -71,10 +82,11 @@ return function()
             for k, v in pairs(F.policeOnStation) do
                 -- if station.hasScum:
                 --- Arrest one scum
-                local scum = get_best_scum(v.station)
+                local scum = get_best_scum_connected(v.station)
                 if scum ~= nil then
                     arrest(scum)
                     v.action = { type = "arrest" }
+                    v.station = scum.station
                     core.filter.update(v)
                 else
                     local station = GET(v.station)

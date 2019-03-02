@@ -16,7 +16,7 @@ return function(x,y, agent_name)
         end,
         draw = function()
             if hovers then love.graphics.setColor(1,0,0) else love.graphics.setColor(0,1,0) end
-            love.graphics.rectangle("fill", x,y,w,h)
+            love.graphics.draw(RESOURCES.roles2[agent_name], x,y,0,2,2)
             love.graphics.setColor(1,1,1)
         end,
         mousePressed = function()

@@ -35,7 +35,7 @@ return function(station)
             count = count + 1
         end
     end
-    scripts.render.renderPolice(station.position.x +  math.sin(station.angle)*  80*(station.playerCapacity+2), station.position.y +math.cos(station.angle) * 80*(station.playerCapacity+2), count)
+    scripts.render.renderPolice(station.position.x , station.position.y, count)
 
 end
 

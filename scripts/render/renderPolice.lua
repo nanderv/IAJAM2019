@@ -7,7 +7,7 @@
 --
 local function draw(x,y,character)
     local img = RESOURCES.roles['police']
-    love.graphics.draw(img, x, y, 0, 2, 2, img:getWidth()/2, img:getHeight()/2 )
+    love.graphics.draw(img, x, y, 0, 8, 8, img:getWidth()/2, img:getHeight()/2 )
 
 end
 return function (x, y, count)

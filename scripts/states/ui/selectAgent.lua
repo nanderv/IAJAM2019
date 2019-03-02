@@ -23,7 +23,7 @@ local findAgent = function(x, y)
         local xx, yy = GETSPOT(GET(v.station), v.spot)
         xx, yy = xx - x, yy - y
 
-        if math.sqrt(xx * xx + yy * yy) < P.agentSize  then
+        if math.sqrt(xx * xx + yy * yy) < P.agentSize then
             return v
         end
     end
@@ -36,21 +36,25 @@ local findSpot = function(x, y, agent)
 
         local xx, yy = GETMETROSPOT(GET(v.action.train), v.spot)
         xx, yy = xx - x, yy - y
-        print(xx, yy, v.isPolice)
-        if math.sqrt(xx * xx + yy * yy) < P.agentSize  then
+        if math.sqrt(xx * xx + yy * yy) < P.agentSize then
             return
         end
     end
 
 
-    local v = GET(agent.station)
-    for i = 1, v.playerCapacity do
-        local xx, yy = GETSPOT(v, i)
-        print(xx, yy, x, y)
-        xx, yy = xx - x, yy - y
-
-        if math.sqrt(xx * xx + yy * yy) < P.agentSize  then
-            return 'station', v, i
+    local s = GET(agent.station)
+    for k, v in pairs(F.station) do
+        if IS_CONNECTED(s.ID, v.ID) then
+            print("HERE")
+            for i = 1, v.playerCapacity do
+                local xx, yy = GETSPOT(v, i)
+                xx, yy = xx - x, yy - y
+                print(math.sqrt(xx * xx + yy * yy))
+                if math.sqrt(xx * xx + yy * yy) < P.agentSize then
+                    print("RETURNING")
+                    return 'station', v, i
+                end
+            end
         end
     end
 
@@ -60,7 +64,7 @@ local findSpot = function(x, y, agent)
             local xx, yy = GETMETROSPOT(v, i)
             xx, yy = xx - x, yy - y
 
-            if math.sqrt(xx * xx + yy * yy) < P.agentSize  then
+            if math.sqrt(xx * xx + yy * yy) < P.agentSize then
                 return 'metro', v, i
             end
         end
@@ -79,12 +83,16 @@ return function()
                 if not agent then return
                 end
                 local type, thing, spot = findSpot(x, y, agent)
+                print(type)
                 if type == 'station' then
                     agent.action = { 'act' }
+                    agent.station = thing.ID
                     agent.spot = spot
+                    print("OK")
                     core.filter.update(agent)
                 elseif type == 'metro' then
                     agent.action = scripts.entities.actions.in_metro(thing.ID)
+                    agent.station = thing.station
                     agent.spot = spot
                     core.filter.update(agent)
                 end
