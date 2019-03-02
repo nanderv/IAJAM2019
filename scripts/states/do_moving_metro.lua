@@ -22,8 +22,6 @@ return function()
             end)
         end,
         selected = nil,
-
-
         enter = function()
             scripts.systems.simulate.move_trains()
             scripts.render.actions.add(5, scripts.render.renderActions.moveMetro())
@@ -32,7 +30,6 @@ return function()
         leave = function() end,
         update = function(dt)
             if not scripts.render.actions.update(dt) then
-                print("III")
                 MYSTATE.setState('do_police')
             end
         end,

@@ -42,6 +42,5 @@ map.generate = function()
     core.entity.add(police)
     local police = scripts.entities.police(i2, scripts.entities.actions.in_metro(t1))
     core.entity.add(police)
-    pprint(F.police)
 end
 return map

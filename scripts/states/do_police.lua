@@ -22,6 +22,15 @@ local function arrest(scum)
     core.entity.remove(scum)
     print("ada")
 end
+local function get_metro(police)
+    local trainList = {}
+    for k,v in pairs(F.train) do
+        if v.station == police.station then
+            trainList[#trainList + 1] = v
+        end
+    end
+    return trainList[ math.random( #trainList ) ]
+end
 local function clean(station)
 
     local act = scripts.render.renderActions.renderCleaning(station)
@@ -52,10 +61,7 @@ return function()
             end)
         end,
         selected = nil,
-
-
         enter = function()
-            print("HERE")
             -- Do the action for each police officer.
             for k,v in pairs(F.policeOnStation) do
                 -- if station.hasScum:
@@ -63,30 +69,43 @@ return function()
                 local scum = get_best_scum(v.station)
                 if scum ~= nil then
                     arrest(scum)
+                    v.action={type="arrest"}
+                    core.filter.update(v)
                 else
                     local station = GET(v.station)
                     if station.dirt > 0 then
                         clean(station)
+                        v.action={type="dirt"}
+                        core.filter.update(v)
+                        v.STATIONCOUNTER = 0
                     else
                         -- try to board train
+                        local train = get_metro(v)
+                        if train then
+                            v.action = scripts.entities.actions.in_metro(train.ID)
+                            core.filter.update(v)
+                        end
                     end
-
-
                 end
             end
             for k,v in pairs(F.policeInMetro) do
                 -- if station.hasScum:
                 --- Officer leaves train
                 --- Arrest one scum
-                print("STATION", v.station)
 
                 local scum = get_best_scum(v.station)
                 if scum ~= nil then
                     arrest(scum)
+                    v.action={type="arrest"}
+                    v.STATIONCOUNTER = 0
+                    core.filter.update(v)
+                else
+                    v.STATIONCOUNTER = v.STATIONCOUNTER + 1
+                    local routeLength =#GET(GET(v.action.train).line).routes
+                    if v.STATIONCOUNTER > routeLength then
+                        core.entity.remove(v)
+                    end
                 end
-                -- if not station.hasScum
-                --- officer enters one of the trains, if available
-
             end
             scripts.render.actions.switch()
 
