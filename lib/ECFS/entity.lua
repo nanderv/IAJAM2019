@@ -9,8 +9,6 @@ core.entity.add = core.filter.update
 function core.entity.remove(entity)
     local R = core.filter.rules
     local id = entity_to_id[entity]
-    entity_to_id[entity] = nil
-    id_to_entity[id] = nil
 
     for _, name_rules in pairs(R) do
         local name = name_rules[1]

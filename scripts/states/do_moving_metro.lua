@@ -32,10 +32,15 @@ return function()
         leave = function() end,
         update = function(dt)
             if not scripts.render.actions.update(dt) then
-                MYSTATE.setState('do_turn')
+                print("III")
+                MYSTATE.setState('do_police')
             end
         end,
-
+        mousePressed = function(x,y, button)
+            if  button == 1 then
+                scripts.render.actions.counter = scripts.render.actions.counter + 1
+            end
+        end,
         prevState="base_map_state"
     }
 end

@@ -9,9 +9,10 @@
 return function()
     for k,v in pairs(F.train) do
         local line = GET(v.line)
-        local from, to = TRAINGETFROMTO(v.ID)
-        v.station = to
         v.route_count = (v.route_count  % #line.routes) + 1
+        local from, to = TRAINGETFROMTO(v.ID)
+
+        v.station = to
 
         for _,w in pairs(F.inMetro) do
             if w.action.train == v.ID then

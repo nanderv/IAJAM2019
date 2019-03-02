@@ -6,13 +6,14 @@ local state = require 'lib.UI.handling'
 MYSTATE = state
 require 'lib.UI.ui_data_state'
 local gamera = require 'lib.gamera'
-CAM = gamera.new(0,0,2000,2000)
+CAM = gamera.new(0,0,4800,4800)
 function addStates()
     print( scripts.states.testPage())
     state.addState("subMenu", scripts.states.testPage())
     state.addState("base_map_state", scripts.states.base_map_state())
     state.addState("do_turn", scripts.states.do_turn())
     state.addState("do_moving_metro", scripts.states.do_moving_metro())
+    state.addState("do_police", scripts.states.do_police())
     state.addState("load_map", scripts.states.load_map())
 
 end
@@ -44,4 +45,8 @@ function love.mousereleased(x,y, button)
 end
 function love.keypressed( key, scancode, isrepeat )
     state.keypressed( key, scancode, isrepeat )
+end
+
+function love.wheelmoved (x,y)
+    state.wheelmoved(x,y)
 end

@@ -91,10 +91,6 @@ state.mousePressedState = function(stateName, x, y, button, istouch, presses)
     if myState.prevState then
         state.mousePressedState(myState.prevState, x, y, button, istouch, presses)
     end
-
-    if myState and myState.mousePressed then
-        myState.mousePressed(x, y, button, istouch, presses)
-    end
     if myState.elements then
         for k, v in ipairs(myState.elements) do
             if v.mousePressed then
@@ -102,6 +98,10 @@ state.mousePressedState = function(stateName, x, y, button, istouch, presses)
             end
         end
     end
+    if myState and myState.mousePressed then
+        myState.mousePressed(x, y, button, istouch, presses)
+    end
+
 end
 
 state.mouseReleasedState = function(stateName, x, y, button, istouch, presses)
@@ -128,6 +128,31 @@ end
 
 state.mouseReleased = function(x, y, button, istouch, presses)
     state.mouseReleasedState(state.currentState, x, y, button, istouch, presses)
+
+end
+
+
+state.wheelMovedState = function(stateName, x, y, px, py)
+    local myState = state.UIStates[stateName]
+    if myState.prevState then
+        state.wheelMovedState(myState.prevState, x, y, px, py)
+    end
+
+    if myState and myState.wheelmoved then
+        myState.wheelmoved(x, y, px, py)
+    end
+    if myState.elements then
+        for k, v in ipairs(myState.elements) do
+            if v.wheelmoved then
+                v.wheelmoved(x, y, px, py)
+            end
+        end
+    end
+end
+
+state.wheelmoved = function(x, y)
+    local px, py = love.mouse.getPosition()
+    state.wheelMovedState(state.currentState, x, y, px, py)
 
 end
 return state

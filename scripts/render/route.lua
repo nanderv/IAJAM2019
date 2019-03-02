@@ -9,6 +9,10 @@
 return function(route)
     local from = GET(route.from)
     local to = GET(route.to)
-
-    love.graphics.line(from.position.x, from.position.y, to.position.x, to.position.y)
+    local prevPos = from.position
+    for k,v in ipairs(route.midpoints) do
+        love.graphics.line(prevPos.x, prevPos.y, v.x, v.y)
+        prevPos = v
+    end
+    love.graphics.line(prevPos.x, prevPos.y, to.position.x, to.position.y)
 end

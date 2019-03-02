@@ -10,6 +10,8 @@ a("spotter", {"isSpotter"})
 a("playerCharacter", {"isPlayer"})
 
 a("pcOnStation", {"_playerCharacter", "-action.inMetro"})
+a("pcInMetro", {"_playerCharacter", "action.inMetro"})
+
 a("pawn", {"isPiece"})
 a("policeOnStation", {"_police", "-action.inMetro"})
 a("policeInMetro", {"_police", "action.inMetro"})

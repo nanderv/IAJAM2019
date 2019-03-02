@@ -6,3 +6,6 @@
 -- To change this template use File | Settings | File Templates.
 --
 
+return function()
+    return {act= true}
+end

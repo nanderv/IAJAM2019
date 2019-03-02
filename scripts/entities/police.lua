@@ -6,14 +6,16 @@
 -- To change this template use File | Settings | File Templates.
 --
 
-return function(station, spot, action)
+return function(station, action)
+    local scum_ID = GET_ID()
+
     return  {
         isPolice = true,
         isPiece = "police",
-        spot = spot,
         station = station,
         action = action,
-    }
+        ID = scum_ID,
+    }, scum_ID
 
 end
 

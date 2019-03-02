@@ -7,6 +7,8 @@
 --
 
 return function(station, spot, action)
+    local scum_ID = GET_ID()
+
     return  {
         isSpotter = true,
         isPlayer = true,
@@ -14,7 +16,8 @@ return function(station, spot, action)
         spot = spot,
         station = station,
         action = action,
-    }
+        ID = scum_ID,
+    }, scum_ID
 
 end
 
