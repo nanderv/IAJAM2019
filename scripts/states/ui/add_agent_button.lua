@@ -7,10 +7,9 @@
 --
 
 
-return function(x,y)
-    x,y = 1820, 1040
+return function(x,y, agent_name)
     local hovers = false
-    local w,h = 100, 50
+    local w,h = 50, 50
     return {
         onHover = function(xx,yy)
             hovers = xx>x and xx < x + w and yy > y and yy < y + h
@@ -22,7 +21,8 @@ return function(x,y)
         end,
         mousePressed = function()
             if hovers then
-                MYSTATE.setState('do_moving_metro')
+                UIDATASTATE.PUT({'new_agenttype'}, agent_name)
+                MYSTATE.setState('add_agent')
                 UIDATASTATE.PUT({ 'station' }, nil)
             end
         end

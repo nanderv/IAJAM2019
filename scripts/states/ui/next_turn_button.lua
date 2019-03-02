@@ -8,6 +8,8 @@
 
 
 return function(x,y)
+    x,y = 1820, 1040
+
     local hovers = false
     local w,h = 100, 50
     return {

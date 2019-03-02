@@ -6,7 +6,7 @@ a("line", { "isLine" })
 a("ID", {"ID"})
 
 a("police", {"isPolice"})
-a("spotter", {"isSpotter"})
+a("spotter", {"isspotter"})
 a("playerCharacter", {"isPlayer"})
 
 a("pcOnStation", {"_playerCharacter", "-action.inMetro"})

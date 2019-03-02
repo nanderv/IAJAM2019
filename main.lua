@@ -25,13 +25,15 @@ local roles = {
     'employeet',
     'bombthreat',
     'spotter',
-    '',
-    ''
+    'graffiti',
+    'musician'
 }
+
 function LOADASSETS()
     RESOURCES.station = {}
     RESOURCES.diamond = {}
     RESOURCES.roles = {}
+    RESOURCES.roles2 = {}
 
 
     RESOURCES.colours = {
@@ -52,6 +54,9 @@ function LOADASSETS()
     for k, v in ipairs(roles) do
         RESOURCES.roles[v] = love.graphics.newImage('assets/processed/p' .. k .. 's1@8x.png')
     end
+    for k, v in ipairs(roles) do
+        RESOURCES.roles2[v] = love.graphics.newImage('assets/processed/p' .. k .. 's2@16x.png')
+    end
     for k, v in ipairs(colours) do
         RESOURCES.diamond[v] = love.graphics.newImage('assets/processed/x1' .. v .. '@16x.png')
     end
@@ -61,12 +66,14 @@ end
 function addStates()
     LOADASSETS()
     print(scripts.states.testPage())
-    state.addState("subMenu", scripts.states.testPage())
+
     state.addState("base_map_state", scripts.states.base_map_state())
     state.addState("do_turn", scripts.states.do_turn())
     state.addState("do_moving_metro", scripts.states.do_moving_metro())
     state.addState("end_turn", scripts.states.end_turn())
     state.addState("do_police", scripts.states.do_police())
+    state.addState("add_agent", scripts.states.add_agent())
+
     state.addState("load_map", scripts.states.load_map())
 end
 

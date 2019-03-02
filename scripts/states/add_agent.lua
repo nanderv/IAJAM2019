@@ -43,10 +43,9 @@ return function()
         update = function()
         end,
         elements = {
-            scripts.states.ui.end_turn_button(300, 300),
-            scripts.states.ui.selectAgent(),
-            scripts.states.ui.agentOptions(),
-            scripts.states.ui.add_agent_button(300, 880, 'pickpocket'),
+            scripts.states.ui.addAgent(1620, 980),
+
+            scripts.states.ui.end_turn_button(1620, 980),
 
         },
         mousePressed = function(x, y, button)

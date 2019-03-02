@@ -6,8 +6,13 @@
 -- To change this template use File | Settings | File Templates.
 --
 local scumValues = {
-    spotter = 1,
-    bombThreat = 0,
+    police = 0,
+    pickpocket = 1,
+    employeet = 1,
+    bombthreat = 0,
+    spotter = 0,
+    graffiti = 2,
+    musician = 1
 }
 
 local function arrest(scum)

@@ -6,13 +6,13 @@
 -- To change this template use File | Settings | File Templates.
 --
 
-return function(station, spot, action)
+return function(station, spot, action, agentType)
     local scum_ID = GET_ID()
 
     return  {
-        isSpotter = true,
+        ['is'..agentType] = true,
         isPlayer = true,
-        isPiece = "spotter",
+        isPiece = agentType,
         spot = spot,
         station = station,
         action = action,
