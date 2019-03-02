@@ -38,7 +38,7 @@ map.generate = function()
     --local train, t1 = scripts.entities.train(line_id, 1)
     --core.entity.add(train)
 
-    local train, t1 = scripts.entities.train(line_id, 3, 17)
+    local train, t1 = scripts.entities.train(line_id, 3, 3)
     core.entity.add(train)
     local police = scripts.entities.spotter(i2, 1, scripts.entities.actions.in_metro(t1))
     core.entity.add(police)

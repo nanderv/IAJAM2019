@@ -18,9 +18,22 @@ local colours = {
     'c',
     'b'
 }
+
+local roles = {
+    'police',
+    'pickpocket',
+    'employeet',
+    'bombthreat',
+    'spotter',
+    '',
+    ''
+}
 function LOADASSETS()
     RESOURCES.station = {}
     RESOURCES.diamond = {}
+    RESOURCES.roles = {}
+
+
     RESOURCES.colours = {
         r = { r = 237, g = 85, b = 59},
         y = { r = 242, g = 177, b = 52},
@@ -35,6 +48,9 @@ function LOADASSETS()
     end
     for k, v in ipairs(colours) do
         RESOURCES.station[v] = love.graphics.newImage('assets/processed/s1' .. v .. '@16x.png')
+    end
+    for k, v in ipairs(roles) do
+        RESOURCES.roles[v] = love.graphics.newImage('assets/processed/p' .. k .. 's1@8x.png')
     end
     for k, v in ipairs(colours) do
         RESOURCES.diamond[v] = love.graphics.newImage('assets/processed/x1' .. v .. '@16x.png')
@@ -91,3 +107,4 @@ end
 function love.wheelmoved(x, y)
     state.wheelmoved(x, y)
 end
+

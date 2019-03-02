@@ -6,8 +6,9 @@
 -- To change this template use File | Settings | File Templates.
 --
 local function draw(x,y,character)
+    local img = RESOURCES.roles[character]
+    love.graphics.draw(img, x, y, 0, 2, 2, img:getWidth()/2, img:getHeight()/2 )
 
-    love.graphics.circle('fill', x,y, 40)
 end
 return function (x, y, character, on_map)
     draw(x,y,character)

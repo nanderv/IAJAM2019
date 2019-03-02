@@ -6,9 +6,9 @@
 -- To change this template use File | Settings | File Templates.
 --
 local function draw(x,y,character)
-    love.graphics.setColor(0,0,1)
-    love.graphics.circle('fill', x,y, 40)
-    love.graphics.setColor(1,1,1)
+    local img = RESOURCES.roles['police']
+    love.graphics.draw(img, x, y, 0, 2, 2, img:getWidth()/2, img:getHeight()/2 )
+
 end
 return function (x, y, count)
     if count > 0 then

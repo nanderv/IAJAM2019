@@ -33,14 +33,13 @@ return function(train)
             if v.isPolice then
 
                 if IS_PRESENT(train.station) then
-                    love.graphics.setColor(0,0,1)
                 else
                     love.graphics.setColor(0,0,0,0)
                 end
             end
 
             local x, y = GETMETROSPOT(GET(v.action.train), v.spot)
-            love.graphics.circle("fill", x, y, 40)
+            scripts.render.renderCharacter(x,y,v.isPiece)
             love.graphics.setColor(1,1,1, 1)
         end
     end

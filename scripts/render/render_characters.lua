@@ -18,13 +18,15 @@ return function(station)
     local count = 0
 
     for i=1, station.playerCapacity do
-        love.graphics.draw(RESOURCES.diamond[station.colour],station.position.x +math.sin(station.angle)* 80*(i +1), station.position.y + math.cos(station.angle) *  80*(i+1), station.angle, 2, 2, 10, 10)
+
+        local img = RESOURCES.diamond[station.colour]
+        love.graphics.draw(img,station.position.x +math.sin(station.angle)* 80*(i +1), station.position.y + math.cos(station.angle) *  80*(i+1), station.angle, 2, 2, img:getWidth()/2, img:getHeight()/2 )
     end
     for k,v in pairs(F.pcOnStation) do
         if v.station == station.ID then
             count = count + 1
             local x, y = GETSPOT(station, v.spot)
-            scripts.render.renderCharacter(x, y)
+            scripts.render.renderCharacter(x, y, v.isPiece)
         end
     end
     count = 0

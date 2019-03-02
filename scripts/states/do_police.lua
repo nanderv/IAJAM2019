@@ -97,7 +97,7 @@ return function()
                                 break
                             end
                             if slot then
-                                v.slot = slot
+                                v.spot = slot
                                 v.action = scripts.entities.actions.in_metro(train.ID)
                             end
                             core.filter.update(v)
