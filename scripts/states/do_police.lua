@@ -12,7 +12,6 @@ local scumValues ={
 }
 
 local function arrest(scum)
-    pprint(scum)
     local stationPosition = GET(scum.station).position
     local act = scripts.render.renderActions.moveCameraTo(stationPosition)
     scripts.render.actions.add(1, act.draw, act.initialize )
@@ -20,7 +19,6 @@ local function arrest(scum)
     scripts.render.actions.add(4, act.draw, act.initialize )
 
     core.entity.remove(scum)
-    print("ada")
 end
 local function get_metro(police)
     local trainList = {}
@@ -35,7 +33,6 @@ local function clean(station)
 
     local act = scripts.render.renderActions.renderCleaning(station)
     scripts.render.actions.add(5, act.draw, act.initialize )
-    print("ada")
 end
 
 local function get_best_scum(station_ID)
@@ -48,7 +45,6 @@ local function get_best_scum(station_ID)
             scumScore = score
         end
     end
-    print(scumScore)
     return scum
 end
 

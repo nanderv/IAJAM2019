@@ -10,7 +10,6 @@ local renderTrain = function(from, to, travelPercentage)
     local x = (from.x * (1 - travelPercentage) + to.x * (travelPercentage))
     local y = (from.y * (1 - travelPercentage) + to.y * (travelPercentage))
 
-
     love.graphics.circle("fill", x, y, 20)
     love.graphics.setColor(1, 1, 1)
 end
@@ -37,13 +36,14 @@ return function()
             local d = length
             local T = event.otime
             local x = (event.otime - event.timeLeft)
-            local distTraveled = GETHOWFARONCURVE(d, x, T) - 40
+            local distTraveled = GETHOWFARONCURVE(d, x, T)
             local prevPos = from.position
             local legLength = 0
             local early = false
             local red, green, blue = math.sin(v.ID), math.sin(2 * v.ID), math.sin(3 * v.ID)
 
             love.graphics.setColor(math.abs(red), math.abs(green), math.abs(blue))
+
             if distTraveled < 0 then
                 renderTrain(from.position, from.position, 0)
             else

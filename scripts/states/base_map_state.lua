@@ -44,7 +44,6 @@ return function()
             end
         end,
         mousePressed = function(x, y, button, istouch, presses)
-            print(button)
             if (button == 2) then
                 print("RMB down")
                 UIDATASTATE.PUT({ "mouse", ".scrolling" }, { x = x, y = y })

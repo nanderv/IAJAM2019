@@ -45,6 +45,7 @@ return function()
         end,
         elements = {
             scripts.states.ui.end_turn_button(300, 300),
+            scripts.states.ui.selectAgent(),
         },
         mousePressed = function(x, y, button)
             local xx, yy = CAM:toWorld(x, y)
