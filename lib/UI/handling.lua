@@ -51,7 +51,6 @@ state.drawState = function(stateName)
 end
 
 state.draw = function()
-    print(state.currentState)
     state.drawState(state.currentState)
 end
 

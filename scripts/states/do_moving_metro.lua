@@ -17,21 +17,23 @@ local sq = require "lib.UI.square"
 return function()
     return {
         draw = function()
-            print("HERE")
             CAM:draw( function()
                 scripts.render.actions.draw()
             end)
         end,
         selected = nil,
-        enter = function()
 
+
+        enter = function()
             scripts.systems.simulate.move_trains()
             scripts.render.actions.add(5, scripts.render.renderActions.moveMetro())
             scripts.render.actions.switch()
         end,
         leave = function() end,
         update = function(dt)
-            scripts.render.actions.update(dt)
+            if not scripts.render.actions.update(dt) then
+                MYSTATE.setState('do_turn')
+            end
         end,
 
         prevState="base_map_state"

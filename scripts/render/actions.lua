@@ -23,9 +23,6 @@ end
 renderer.update = function(dt)
     local step = steps[counter]
     if not step then
-        scripts.systems.simulate.move_trains()
-        scripts.render.actions.add(5, scripts.render.renderActions.moveMetro())
-        renderer.switch()
         return false
     end
     step.timeLeft = step.timeLeft - dt

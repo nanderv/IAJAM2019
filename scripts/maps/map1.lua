@@ -11,9 +11,9 @@ map.name = "tutorial"
 map.description = "explains basic things"
 
 map.generate = function()
-    local station_1, i1 = scripts.entities.station(50,100, "west", 3, 3)
-    local station_2, i2 = scripts.entities.station(350,400, "centraal", 3, 3)
-    local station_3, i3 = scripts.entities.station(650,100, "oost", 3, 3)
+    local station_1, i1 = scripts.entities.station(550,100, "west", 3, 3)
+    local station_2, i2 = scripts.entities.station(740,400, "centraal", 3, 3)
+    local station_3, i3 = scripts.entities.station(950,100, "oost", 3, 3)
 
     core.entity.add(station_1)
     core.entity.add(station_2)
@@ -34,7 +34,12 @@ map.generate = function()
 
     local train, t1  = scripts.entities.train(line_id, 3)
     core.entity.add(train)
-    local spotter = scripts.entities.spotter(i1, 1, scripts.entities.actions.in_metro(t1))
+    local spotter = scripts.entities.spotter(i1, 1, {})
     core.entity.add(spotter)
+    local police= scripts.entities.spotter(i2, 2, {})
+    core.entity.add(police)
+    local police= scripts.entities.spotter(i2, 3, {})
+    core.entity.add(police)
+    pprint(F.police)
 end
 return map

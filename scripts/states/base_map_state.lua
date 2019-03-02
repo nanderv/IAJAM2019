@@ -15,6 +15,7 @@ return function()
                 -- draw camera stuff here
                 core.run("station", scripts.render.station)
                 core.run("route", scripts.render.route)
+                core.run("station", scripts.render.render_characters)
             end)
 
         end,

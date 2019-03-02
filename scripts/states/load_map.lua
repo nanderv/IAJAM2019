@@ -11,7 +11,7 @@ return function()
     return {
         draw = function()
             CAM:draw( function()
-                MYSTATE.setState("do_moving_metro")
+                MYSTATE.setState("do_turn")
 
             end)
         end,

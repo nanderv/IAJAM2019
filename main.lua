@@ -11,16 +11,18 @@ function addStates()
     print( scripts.states.testPage())
     state.addState("subMenu", scripts.states.testPage())
     state.addState("base_map_state", scripts.states.base_map_state())
+    state.addState("do_turn", scripts.states.do_turn())
     state.addState("do_moving_metro", scripts.states.do_moving_metro())
     state.addState("load_map", scripts.states.load_map())
 
 end
 function love.load()
+    love.graphics.setDefaultFilter( 'nearest', 'nearest' )
     require 'scripts'
     addStates()
     UIDATASTATE.PUT({"scrol"}, {x=0, y=0, zoom=1})
     UIDATASTATE.PUT({"map"}, "map1")
-
+    CAM:setScale(0.01)
     state.setState("load_map")
 
 end

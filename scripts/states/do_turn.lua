@@ -36,6 +36,9 @@ return function()
         update = function()
 
         end,
+        elements = {
+            scripts.states.ui.end_turn_button(300, 300)
+        },
         prevState="base_map_state"
     }
 end

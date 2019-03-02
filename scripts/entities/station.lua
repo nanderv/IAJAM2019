@@ -7,14 +7,13 @@
 --
 
 
-return function(x, y, name, player_capacity, police_capacity, pauper, dirt)
+return function(x, y, name, player_capacity, pauper, dirt)
     local station_ID = GET_ID()
     return {
         isStation = true,
         name = name,
         position = { x = x, y = y },
         playerCapacity = player_capacity,
-        policeCapacity = police_capacity,
         pauper = pauper or 0,
         dirt = dirt or 0,
         ID = station_ID,
