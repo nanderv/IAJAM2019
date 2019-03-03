@@ -59,6 +59,12 @@ return function()
             if y > 0 then
                 CAM:setPosition(tx, ty)
             end
-        end
+        end,
+        keypressed = function(key, scancode, isrepeat)
+            if (key == 'f11') then
+                local isFullscreen, fstype = love.window.getFullscreen()
+                love.window.setFullscreen(not isFullscreen)
+            end
+        end,
     }
 end
