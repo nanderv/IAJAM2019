@@ -20,12 +20,12 @@ a("inMetro", {"_pawn", "action.inMetro"})
 
 a("connector", {"isConnector"})
 
-a('pickpocket', {"pickpocket"})
-a('employeet', {"employeet"})
-a('bombthreat', {"bombthreat"})
-a('spotter', {"spotter"})
-a('graffiti', {"graffiti"})
-a('musician', {"musician"})
+a('pickpocket', {"ispickpocket"})
+a('employeet', {"isemployeet"})
+a('bombthreat', {"isbombthreat"})
+a('spotter', {"isspotter"})
+a('graffiti', {"isgraffiti"})
+a('musician', {"ismusician"})
 
 a('hiddenpickpocket', {"_pickpocket", 'action.hide'})
 a('hiddenemployeet', {"_employeet", 'action.hide'})

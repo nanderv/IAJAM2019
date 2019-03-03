@@ -14,18 +14,68 @@
 -- To change this template use File | Settings | File Templates.
 --
 
+local roles = {
+    'pickpocket',
+    'employeet',
+    'bombthreat',
+    'spotter',
+    'graffiti',
+    'musician'
+}
 
+local roleFunctions = {
+    hidden = {
+        pickpocket =  function(entity, results)
+
+        end,
+        employeet =  function(entity, results)
+
+        end,
+        bombthreat =  function(entity, results)
+
+        end,
+        spotter =  function(entity, results)
+            print("DOES NOTHING")
+        end,
+        graffiti =  function(entity, results)
+
+        end,
+        musician = function(entity, results)
+
+        end,
+    },
+    active = {
+        pickpocket =  function(entity, results)  end,
+        employeet =  function(entity, results)  end,
+        bombthreat =  function(entity, results)  end,
+        spotter =  function(entity, results)
+            print("DOES NOTHING ACTIVELY")
+        end,
+        graffiti =  function(entity, results)  end,
+        musician = function(entity, results)  end,
+    }
+}
 local function newResults() return {
     arrested = 0,
-    pickpockets = 0,
-    pickpocketsHiding = 0,
-    musicians = 0,
-    musiciansHiding = 0,
-    musicianIncome = 0,
+
+    hiddenpickpocket = 0,
+    hiddenemployeet = 0,
+    hiddenbombthreat = 0,
+    hiddenspotter = 0,
+    hiddengraffiti = 0,
+    hiddenmusician = 0,
+
+    activepickpocket = 0,
+    activeemployeet = 0,
+    activebombthreat = 0,
+    activespotter = 0,
+    activegraffiti = 0,
+    activemusician = 0,
 }
 end
 
 local results  = {}
+
 return function()
     return {
         draw = function()
@@ -42,16 +92,24 @@ return function()
         },
         selected = nil,
         enter = function()
-            -- set all the data
-
             for k,v in pairs(F.station) do
                 v.disabled = nil
-
             end
+            for _,v in pairs(roles) do
+
+                for k,w in pairs(F["hidden"..v]) do
+                    roleFunctions.hidden[v](w, results)
+                end
+                for k,w in pairs(F["active"..v]) do
+                    roleFunctions.hidden[v](w, results)
+                end
+            end
+
 
         end,
         leave = function()
             results= newResults()
+            RR = results
         end,
         mousePressed = function(x, y, button)
             --   MYSTATE.setState('do_turn')

@@ -36,6 +36,14 @@ local actions = {
     'confirm',
 }
 
+function ADD_CRIME(station, amount )
+    station.crime = station.crime + amount
+    GLOBALSTATS.crime = GLOBALSTATS.crime + amount
+end
+GLOBALSTATS = {
+    money = 1000,
+    crime = 0,
+}
 function LOADASSETS()
     RESOURCES.station = {}
     RESOURCES.diamond = {}

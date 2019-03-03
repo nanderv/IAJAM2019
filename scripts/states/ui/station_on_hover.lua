@@ -34,7 +34,6 @@ return function()
         end,
         draw = function()
             if hovers then
-                print("HERE")
                 love.graphics.setColor(1-hovers.pauper/100, 1-hovers.pauper/100, 1-hovers.pauper/100)
                 CAM:draw(function()
                     love.graphics.setFont(font)

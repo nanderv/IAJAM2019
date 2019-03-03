@@ -60,7 +60,6 @@ return function()
                     for i = 1, #actions do
 
                         local xx, yy, angle = getAgentPosition(agent, i, #actions)
-                        print(xx,yy)
                         if xx then
                             xx, yy = xx - x, yy - y
                             local dist = math.sqrt(xx*xx + yy * yy)

@@ -45,13 +45,10 @@ local findSpot = function(x, y, agent)
     local s = GET(agent.station)
     for k, v in pairs(F.station) do
         if IS_CONNECTED(s.ID, v.ID) then
-            print("HERE")
             for i = 1, v.playerCapacity do
                 local xx, yy = GETSPOT(v, i)
                 xx, yy = xx - x, yy - y
-                print(math.sqrt(xx * xx + yy * yy))
                 if math.sqrt(xx * xx + yy * yy) < P.agentSize then
-                    print("RETURNING")
                     return 'station', v, i
                 end
             end
@@ -89,7 +86,6 @@ return function()
                     agent.action = { 'act' }
                     agent.station = thing.ID
                     agent.spot = spot
-                    print("OK")
                     core.filter.update(agent)
                 elseif type == 'metro' then
                     agent.action = scripts.entities.actions.in_metro(thing.ID)

@@ -36,7 +36,6 @@ local findSpot = function(x, y)
 
         local xx, yy = GETMETROSPOT(GET(v.action.train), v.spot)
         xx, yy = xx - x, yy - y
-        print(xx, yy, v.isPolice)
         if math.sqrt(xx * xx + yy * yy) < P.agentSize then
             return
         end
@@ -47,7 +46,6 @@ local findSpot = function(x, y)
         if IS_PRESENT(v.ID) then
             for i = 1, v.playerCapacity do
                 local xx, yy = GETSPOT(v, i)
-                print(xx, yy, x, y)
                 xx, yy = xx - x, yy - y
 
                 if math.sqrt(xx * xx + yy * yy) < P.agentSize then
