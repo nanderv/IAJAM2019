@@ -7,7 +7,7 @@ MYSTATE = state
 require 'lib.UI.ui_data_state'
 local gamera = require 'lib.gamera'
 CAM = gamera.new(-200, -200, 9600, 9600)
-font = love.graphics.newFont(32)
+font = love.graphics.newFont( 32 )
 
 P = {}
 P.agentSize = 40
@@ -21,8 +21,10 @@ local colours = {
 }
 
 BONUSES = {
-    { 10, 100 },
-    { 500, 200 },
+    { 10, 100},
+    { 100, 100},
+    { 300, 100},
+    { 500, 200},
     { 700, 200 }
 }
 COSTSPERUNIT = {
@@ -138,8 +140,8 @@ function love.draw()
         love.graphics.rectangle("fill", 0, 0, 2000, 50)
         love.graphics.setColor(1, 1, 1)
         love.graphics.print("€ " .. tostring(GLOBALSTATS.money), 10, 10)
-        love.graphics.print("CRIME = " .. tostring(GLOBALSTATS.crime), 300, 10)
-        love.graphics.print("OF " .. tostring(GLOBALSTATS.goal), 480, 10)
+        love.graphics.print("CRIME = " .. tostring (GLOBALSTATS.crime).."OF " .. tostring (GLOBALSTATS.goal), 300, 10)
+
         local bonus;
         for k, v in ipairs(BONUSES) do
             if v[1] > GLOBALSTATS.crime then
