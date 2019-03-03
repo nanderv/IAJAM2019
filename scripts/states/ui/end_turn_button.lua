@@ -22,6 +22,8 @@ return function(x,y)
         end,
         mousePressed = function()
             if hovers then
+                MOUSEMISSED = false
+
                 MYSTATE.setState('do_moving_metro')
                 UIDATASTATE.PUT({ 'station' }, nil)
             end

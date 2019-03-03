@@ -77,13 +77,14 @@ return function()
                 local agent = findAgent(x, y)
                 if agent then
                     UIDATASTATE.PUT({ "agent" }, agent)
+                    MOUSEMISSED = false
                 end
             elseif button == 2 then
                 local agent = UIDATASTATE.GET({ "agent" })
                 if not agent then return
                 end
+                MOUSEMISSED = false
                 local type, thing, spot = findSpot(x, y, agent)
-                print(type)
                 if type == 'station' then
                     agent.action = { 'act' }
                     agent.station = thing.ID

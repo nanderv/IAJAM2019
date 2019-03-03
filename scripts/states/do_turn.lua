@@ -51,11 +51,13 @@ return function()
             if button == 1 then
                 for k, v in pairs(F.station) do
                     if dist(v.position, { x = xx, y = yy }) < 30 then
+                        MOUSEMISSED = false
                         print("CLICKED ON STATION " .. v.ID)
                         UIDATASTATE.PUT({ "station" }, v.ID)
                     end
                 end
             end
+
         end,
         prevState = "base_map_state"
     }

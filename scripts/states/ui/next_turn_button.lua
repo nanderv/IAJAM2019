@@ -23,6 +23,7 @@ return function(x,y)
         end,
         mousePressed = function()
             if hovers then
+                MOUSEMISSED = false
                 MYSTATE.setState('do_turn')
                 UIDATASTATE.PUT({ 'station' }, nil)
             end

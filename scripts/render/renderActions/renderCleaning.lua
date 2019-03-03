@@ -7,14 +7,14 @@
 --
 
 
-return function(scum)
+return function(station)
 
     return {
         draw = function(event)
             local t = event.otime - event.timeLeft
             local T = event.otime
-            local stationPosition = GET(scum.station).position
-
+            local stationPosition = station.position
+            love.graphics.print("Agent arrested", stationPosition.x , stationPosition.y + 160)
         end,
         initialize = function()
 

@@ -21,6 +21,7 @@ return function(x,y, agent_name)
         end,
         mousePressed = function()
             if hovers then
+                MOUSEMISSED = false
                 UIDATASTATE.PUT({'new_agenttype'}, agent_name)
                 MYSTATE.setState('add_agent')
                 UIDATASTATE.PUT({ 'station' }, nil)

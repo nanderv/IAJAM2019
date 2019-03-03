@@ -36,7 +36,10 @@ return function()
         selected = nil,
         enter = function() end,
         leave = function() end,
-        elements = {},
+        elements = {
+            scripts.states.ui.station_on_hover()
+
+        },
         mouseReleased = function(x, y, button, istouch, presses)
             if (button == 2) then
                 print("RMB up")
@@ -46,6 +49,7 @@ return function()
         mousePressed = function(x, y, button, istouch, presses)
             if (button == 2) then
                 print("RMB down")
+                MOUSEMISSED = false
                 UIDATASTATE.PUT({ "mouse", ".scrolling" }, { x = x, y = y })
             end
         end,

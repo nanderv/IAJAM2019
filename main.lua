@@ -29,11 +29,19 @@ local roles = {
     'musician'
 }
 
+local actions = {
+    'delete',
+    'hidden',
+    'visible',
+    'confirm',
+}
+
 function LOADASSETS()
     RESOURCES.station = {}
     RESOURCES.diamond = {}
     RESOURCES.roles = {}
     RESOURCES.roles2 = {}
+    RESOURCES.action = {}
 
 
     RESOURCES.colours = {
@@ -50,6 +58,9 @@ function LOADASSETS()
     end
     for k, v in ipairs(colours) do
         RESOURCES.station[v] = love.graphics.newImage('assets/processed/s1' .. v .. '@16x.png')
+    end
+    for k, v in ipairs(actions) do
+        RESOURCES.action[v] = love.graphics.newImage('assets/processed/a' .. k .. 's2@16x.png')
     end
     for k, v in ipairs(roles) do
         RESOURCES.roles[v] = love.graphics.newImage('assets/processed/p' .. k .. 's1@8x.png')

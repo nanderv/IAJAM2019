@@ -152,6 +152,7 @@ return function()
         end,
         mousePressed = function(x, y, button)
             if button == 1 then
+                MOUSEMISSED = false
                 scripts.render.actions.counter = scripts.render.actions.counter + 1
             end
         end,

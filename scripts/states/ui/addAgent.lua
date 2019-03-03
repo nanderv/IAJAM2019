@@ -77,12 +77,14 @@ return function()
                 local type, thing, spot = findSpot(x, y)
                 local agent = scripts.entities.spotter(nil, 1, {}, UIDATASTATE.GET({ 'new_agenttype' }))
                 if type == 'station' then
+                    MOUSEMISSED = false
                     agent.station = thing.ID
                     agent.action = { 'act' }
                     agent.spot = spot
                     core.filter.update(agent)
                     MYSTATE.setState('do_turn')
                 elseif type == 'metro' then
+                    MOUSEMISSED = false
                     agent.action = scripts.entities.actions.in_metro(thing.ID)
                     agent.station = thing.station
                     agent.spot = spot

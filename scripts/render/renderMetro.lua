@@ -20,7 +20,6 @@ GETMETROSPOT = function(train, i)
     return station.position.x + xdir * 80 * (i + 1), station.position.y + ydir * 80 * (i + 1)
 end
 return function(train)
-
     love.graphics.setColor(0.5, 0.5, 0.5)
     for i = 1, train.capacity do
         local x, y = GETMETROSPOT(train, i)

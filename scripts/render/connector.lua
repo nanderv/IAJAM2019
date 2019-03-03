@@ -11,7 +11,6 @@ return function(route)
     local from = GET(route.station1)
     local to = GET(route.station2)
 
-
     love.graphics.line(from.position.x, from.position.y, to.position.x, to.position.y)
     love.graphics.setColor(1,1,1)
     love.graphics.setLineWidth( 4 )

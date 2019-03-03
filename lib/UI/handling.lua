@@ -123,7 +123,12 @@ state.mouseReleasedState = function(stateName, x, y, button, istouch, presses)
 end
 
 state.mousePressed = function(x, y, button, istouch, presses)
+    MOUSEMISSED = true
     state.mousePressedState(state.currentState, x, y, button, istouch, presses)
+    if MOUSEMISSED then
+        UIDATASTATE.PUT({ "agent" }, nil)
+    end
+
 end
 
 state.mouseReleased = function(x, y, button, istouch, presses)

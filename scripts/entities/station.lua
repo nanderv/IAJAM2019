@@ -17,7 +17,7 @@ return function(x, y, name, player_capacity, pauper, dirt, angle, colour)
         colour = colour,
         pauper = pauper or 0,
         dirt = dirt or 0,
-        angle = angle or 0.25*math.pi,
+        angle = angle or math.random() * 2* math.pi,
         ID = station_ID,
     }, station_ID
 end
