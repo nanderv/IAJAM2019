@@ -17,12 +17,16 @@ local sq = require "lib.UI.square"
 return function()
     return {
         draw = function()
-            CAM:draw( function()
+            CAM:draw(function()
                 scripts.render.actions.draw()
             end)
         end,
         selected = nil,
         enter = function()
+            if (RESOURCES.soundEffects['metro_moving']:isPlaying()) then
+                RESOURCES.soundEffects['metro_moving']:stop()
+            end
+            RESOURCES.soundEffects['metro_moving']:play()
             scripts.systems.simulate.move_trains()
             scripts.render.actions.add(5, scripts.render.renderActions.moveMetro())
             scripts.render.actions.switch()
@@ -33,12 +37,12 @@ return function()
                 MYSTATE.setState('do_police')
             end
         end,
-        mousePressed = function(x,y, button)
-            if  button == 1 then
+        mousePressed = function(x, y, button)
+            if button == 1 then
                 MOUSEMISSED = false
                 scripts.render.actions.counter = scripts.render.actions.counter + 1
             end
         end,
-        prevState="base_map_state"
+        prevState = "base_map_state"
     }
 end

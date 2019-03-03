@@ -91,11 +91,16 @@ return function()
                 end
             end
         end,
-        elements={
-
-        },
+        elements = {},
         draw = function()
-            RENDERINFO(UIDATASTATE.GET({'new_agenttype'}))
+            local agentType = UIDATASTATE.GET({ 'new_agenttype' })
+            if (agentType ~= 'employeet') then
+                if (RESOURCES.soundEffects[agentType]:isPlaying()) then
+                    RESOURCES.soundEffects[agentType]:stop()
+                end
+                RESOURCES.soundEffects[agentType]:play()
+            end
+            RENDERINFO(agentType)
         end
     }
 end

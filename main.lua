@@ -110,13 +110,15 @@ function LOADASSETS()
     for k, v in ipairs(colours) do
         RESOURCES.wagon3[v] = love.graphics.newImage('assets/processed/w3' .. v .. '@16x.png')
     end
-    RESOURCES.soundEffects[roles[1]] = love.audio.newSource('assets/Music/Police_sirens.ogg', 'stream')
-    RESOURCES.soundEffects[roles[2]] = love.audio.newSource('assets/Music/Pickpocket.ogg', 'stream')
-    RESOURCES.soundEffects[roles[4]] = love.audio.newSource('assets/Music/Bombthreat.ogg', 'stream')
-    RESOURCES.soundEffects[roles[5]] = love.audio.newSource('assets/Music/Trainspotter.ogg', 'stream')
-    RESOURCES.soundEffects['dragging'] = love.audio.newSource('assets/Music/Dragging.ogg', 'stream')
-    RESOURCES.soundEffects['metro_moving'] = love.audio.newSource('assets/Music/Metro_moving.ogg', 'stream')
-    RESOURCES.soundEffects['coindrop'] = love.audio.newSource('assets/Music/Coindrop.ogg', 'stream')
+    RESOURCES.soundEffects[roles[1]] = love.audio.newSource('assets/Music/Characters/Police_sirens.ogg', 'stream')
+    RESOURCES.soundEffects[roles[2]] = love.audio.newSource('assets/Music/Characters/Pickpocket.ogg', 'stream')
+    RESOURCES.soundEffects[roles[4]] = love.audio.newSource('assets/Music/Characters/Bombthreat.ogg', 'stream')
+    RESOURCES.soundEffects[roles[5]] = love.audio.newSource('assets/Music/Characters/Trainspotter.ogg', 'stream')
+    RESOURCES.soundEffects[roles[6]] = love.audio.newSource('assets/Music/Characters/Graffiti Artist.ogg', 'stream')
+    RESOURCES.soundEffects[roles[7]] = love.audio.newSource('assets/Music/Characters/Street_musician.ogg', 'stream')
+    RESOURCES.soundEffects['dragging'] = love.audio.newSource('assets/Music/Miscelanious/Dragging.ogg', 'stream')
+    RESOURCES.soundEffects['metro_moving'] = love.audio.newSource('assets/Music/Miscelanious/Metro_moving.ogg', 'stream')
+    RESOURCES.soundEffects['coindrop'] = love.audio.newSource('assets/Music/Miscelanious/Coindrop.ogg', 'stream')
     pprint(RESOURCES)
 end
 

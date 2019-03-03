@@ -20,6 +20,10 @@ local function arrest(scum)
     local stationPosition = GET(scum.station).position
     local act = scripts.render.renderActions.moveCameraTo(stationPosition)
     scripts.render.actions.add(1, act.draw, act.initialize)
+    if (RESOURCES.soundEffects['police']:isPlaying()) then
+        RESOURCES.soundEffects['police']:stop()
+    end
+    RESOURCES.soundEffects['police']:play()
     local act = scripts.render.renderActions.renderArrest(scum)
     scripts.render.actions.add(4, act.draw, act.initialize)
     if UIDATASTATE.GET({ "agent" }) == scum then
@@ -46,6 +50,7 @@ local function clean(station)
     local act = scripts.render.renderActions.renderCleaning(station)
     scripts.render.actions.add(5, act.draw, act.initialize)
 end
+
 local function get_best_scum_connected(station_ID)
     local scum
     local scumScore = 0
@@ -58,6 +63,7 @@ local function get_best_scum_connected(station_ID)
     end
     return scum
 end
+
 local function get_best_scum(station_ID)
     local scum
     local scumScore = 0
@@ -105,7 +111,7 @@ return function()
                         if train then
                             local slot
                             local founds = {}
-                            for i=1, train.capacity do
+                            for i = 1, train.capacity do
                                 founds[i] = i
                             end
                             for k, v in pairs(F.inMetro) do
