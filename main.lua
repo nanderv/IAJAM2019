@@ -68,6 +68,8 @@ function LOADASSETS()
     RESOURCES.wagon = {}
     RESOURCES.wagon2 = {}
     RESOURCES.wagon3 = {}
+    RESOURCES.skipButton = love.graphics.newImage('assets/processed/u1m1@16x.png')
+    RESOURCES.playButton = love.graphics.newImage('assets/processed/u2m1@16x.png')
 
 
     RESOURCES.colours = {

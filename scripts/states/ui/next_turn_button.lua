@@ -8,7 +8,7 @@
 
 
 return function(x,y)
-    x,y = 1820, 1040
+    x,y = 1820, 1020
 
     local hovers = false
     local w,h = 100, 50
@@ -18,8 +18,7 @@ return function(x,y)
         end,
         draw = function()
             if hovers then love.graphics.setColor(1,0,0) else love.graphics.setColor(0,1,0) end
-            love.graphics.rectangle("fill", x,y,w,h)
-            love.graphics.setColor(1,1,1)
+            love.graphics.draw(RESOURCES.skipButton,x,y)
         end,
         mousePressed = function()
             if hovers then
