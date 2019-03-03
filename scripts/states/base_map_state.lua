@@ -38,7 +38,6 @@ return function()
         leave = function() end,
         elements = {
             scripts.states.ui.station_on_hover()
-
         },
         mouseReleased = function(x, y, button, istouch, presses)
             if (button == 2) then
