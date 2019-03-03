@@ -7,7 +7,7 @@ MYSTATE = state
 require 'lib.UI.ui_data_state'
 local gamera = require 'lib.gamera'
 CAM = gamera.new(-200, -200, 9600, 9600)
-font = love.graphics.newFont( 32 )
+font = love.graphics.newFont(32)
 
 P = {}
 P.agentSize = 40
@@ -21,10 +21,10 @@ local colours = {
 }
 
 BONUSES = {
-    { 10, 100},
-    { 100, 100},
-    { 300, 100},
-    { 500, 200},
+    { 10, 100 },
+    { 100, 100 },
+    { 300, 100 },
+    { 500, 200 },
     { 700, 200 }
 }
 COSTSPERUNIT = {
@@ -70,6 +70,8 @@ function LOADASSETS()
     RESOURCES.wagon3 = {}
     RESOURCES.skipButton = love.graphics.newImage('assets/processed/u1m1@16x.png')
     RESOURCES.playButton = love.graphics.newImage('assets/processed/u2m1@16x.png')
+    RESOURCES.music = love.audio.newSource('assets/Music/Electric Underground.ogg', 'stream')
+    RESOURCES.soundEffects = {}
 
 
     RESOURCES.colours = {
@@ -108,6 +110,13 @@ function LOADASSETS()
     for k, v in ipairs(colours) do
         RESOURCES.wagon3[v] = love.graphics.newImage('assets/processed/w3' .. v .. '@16x.png')
     end
+    RESOURCES.soundEffects[roles[1]] = love.audio.newSource('assets/Music/Police_sirens.ogg', 'stream')
+    RESOURCES.soundEffects[roles[2]] = love.audio.newSource('assets/Music/Pickpocket.ogg', 'stream')
+    RESOURCES.soundEffects[roles[4]] = love.audio.newSource('assets/Music/Bombthreat.ogg', 'stream')
+    RESOURCES.soundEffects[roles[5]] = love.audio.newSource('assets/Music/Trainspotter.ogg', 'stream')
+    RESOURCES.soundEffects['dragging'] = love.audio.newSource('assets/Music/Dragging.ogg', 'stream')
+    RESOURCES.soundEffects['metro_moving'] = love.audio.newSource('assets/Music/Metro_moving.ogg', 'stream')
+    RESOURCES.soundEffects['coindrop'] = love.audio.newSource('assets/Music/Coindrop.ogg', 'stream')
     pprint(RESOURCES)
 end
 
@@ -137,6 +146,9 @@ function love.load()
     love.graphics.setFont(font)
 
     state.setState("load_menu")
+
+    RESOURCES.music:setLooping(true)
+    RESOURCES.music:play()
 end
 
 function love.update(dt)
@@ -154,7 +166,7 @@ function love.draw()
         love.graphics.rectangle("fill", 0, 0, 2000, 50)
         love.graphics.setColor(1, 1, 1)
         love.graphics.print("€ " .. tostring(GLOBALSTATS.money), 10, 10)
-        love.graphics.print("CRIME = " .. tostring (GLOBALSTATS.crime).."OF " .. tostring (GLOBALSTATS.goal), 300, 10)
+        love.graphics.print("CRIME = " .. tostring(GLOBALSTATS.crime) .. "OF " .. tostring(GLOBALSTATS.goal), 300, 10)
 
         local bonus;
         for k, v in ipairs(BONUSES) do
