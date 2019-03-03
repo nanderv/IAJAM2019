@@ -130,10 +130,10 @@ function addStates()
     state.addState("end_turn", scripts.states.end_turn())
     state.addState("do_police", scripts.states.do_police())
     state.addState("add_agent", scripts.states.add_agent())
-
     state.addState("load_map", scripts.states.load_map())
-
     state.addState("load_menu", scripts.states.load_menu())
+    state.addState("game_over", scripts.states.game_lost())
+    state.addState("victory", scripts.states.game_won())
 end
 
 function love.load()

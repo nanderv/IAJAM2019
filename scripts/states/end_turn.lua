@@ -127,6 +127,7 @@ return function()
                 v.disabled = nil
                 v.pauper = math.max(0,v.pauper - 5)
             end
+
             for _, v in pairs(roles) do
 
                 for k, w in pairs(F["hidden" .. v]) do
@@ -138,10 +139,16 @@ return function()
                 end
             end
 
+            local count = 0
+
             for k, v in pairs(F.playerCharacter) do
+                count = count + 1
                 local costs = COSTSPERUNIT[v.isPiece]
                 adders.add_money(-costs[2])
                 results.wages = results.wages + costs[2]
+            end
+            if F.playerCharacter == 0 then
+                MYSTATE.setState('game_over')
             end
 
             for i=1, #BONUSES do
