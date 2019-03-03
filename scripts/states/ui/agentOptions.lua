@@ -6,16 +6,15 @@
 -- To change this template use File | Settings | File Templates.
 --
 local getActions = {
-    police = {},
     pickpocket = {
         'hidden',
         'delete'
     },
-    employeet = {},
-    bombthreat = {},
-    spotter = { 'delete' },
-    graffiti = {},
-    musician = {}
+    employeet = {'delete'},
+    bombthreat = {'delete'},
+    spotter = { 'hidden','delete' },
+    graffiti = {'hidden', 'delete'},
+    musician = {'hidden', 'delete'}
 }
 
 local functions = {

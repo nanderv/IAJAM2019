@@ -6,14 +6,12 @@
 -- To change this template use File | Settings | File Templates.
 --
 
-INFOS = {
-    pickpocket = {"Pickpocket","Cost = €30", "Salary = €0", "Causes Nuisance"},
-    employeet = {"Employeet","Cost = €30", "Salary = €0", "Causes Nuisance"},
-    bombthreat = {"Bomb Threat", "Cost = €30", "Salary = €0", "Causes Nuisance"},
-    spotter = {"Spotter", "Cost = €30", "Salary = €0", "Causes Nuisance"},
-    graffiti = {"Graffiti","Cost = €30", "Salary = €0", "Causes Nuisance"},
-    musician = {"Musician","Cost = €30", "Salary = €0", "Causes Nuisance"}
-}
+local function getInfo(agent_name, full_name, description)
+    print(COSTSPERUNIT)
+    return {full_name,"Cost = €"..tostring(COSTSPERUNIT[agent_name][1]), "Salary = €"..tostring(COSTSPERUNIT[agent_name][2]), description}
+
+end
+
 RENDERINFO= function (agent_name)
     love.graphics.setColor(0.5,0.5,0.8)
     love.graphics.rectangle("fill", 0, 800, 400, 200)
@@ -23,7 +21,16 @@ RENDERINFO= function (agent_name)
     end
 
 end
+
 return function(x,y, agent_name)
+    INFOS = {
+        pickpocket = getInfo('pickpocket', 'Pickpocket', 'Causes nuisance'),
+        employeet = getInfo('employeet', 'Employeet', 'Causes nuisance'),
+        bombthreat = getInfo('bombthreat', 'Bombthreat', 'Causes nuisance'),
+        spotter =getInfo('spotter', 'Spotter', 'Causes nuisance'),
+        graffiti = getInfo('graffiti', 'Graffiti', 'Causes nuisance'),
+        musician = getInfo('musician', 'Musician', 'Causes nuisance'),
+    }
     local hovers = false
     local w,h = 50, 50
     return {

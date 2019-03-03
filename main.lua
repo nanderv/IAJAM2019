@@ -19,7 +19,14 @@ local colours = {
     'c',
     'b'
 }
-
+COSTSPERUNIT = {
+    pickpocket = { 2, 1 },
+    employeet = { 2, 1 },
+    bombthreat = { 2, 1 },
+    spotter = { 2, 1 },
+    graffiti = { 2, 1 },
+    musician ={ 2, 1 },
+}
 local roles = {
     'police',
     'pickpocket',
@@ -37,10 +44,6 @@ local actions = {
     'confirm',
 }
 
-function ADD_CRIME(station, amount )
-    station.crime = station.crime + amount
-    GLOBALSTATS.crime = GLOBALSTATS.crime + amount
-end
 GLOBALSTATS = {
     money = 1000,
     crime = 0,
