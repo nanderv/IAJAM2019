@@ -33,12 +33,13 @@ return function()
         end,
         draw = function()
             if hovers then
-                love.graphics.setColor(1-hovers.pauper/100, 1-hovers.pauper/100, 1-hovers.pauper/100)
+                love.graphics.setColor(1,0,0,hovers.pauper/30)
+
                 CAM:draw(function()
-                    love.graphics.circle('fill', hovers.position.x, hovers.position.y, 100)
+                    love.graphics.arc( "fill", hovers.position.x, hovers.position.y, 100, math.pi, 2*math.pi )
 
 
-                    love.graphics.setColor(1-hovers.dirt/10, 1-hovers.dirt/100, 1-hovers.dirt/100)
+                    love.graphics.setColor(165/255,42/255,42/255, hovers.dirt/10)
 
                     love.graphics.arc( "fill", hovers.position.x, hovers.position.y, 100, 0, math.pi )
 

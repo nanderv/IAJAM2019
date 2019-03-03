@@ -50,12 +50,12 @@ local roleFunctions = {
         employeet = function(entity, results) end,
         bombthreat = function(entity, results) end,
         spotter = function(entity, results)
-            print("DOES NOTHING ACTIVELY")
+            print("DOES NOTHING")
         end,
         graffiti = function(entity, results)
-
+            results.dirt  = results.dirt + 1
             local station = GET(entity.station)
-            station.dirt = station.dirt + 1
+            station.dirt = math.min(station.dirt + 1, 10)
         end,
         musician = function(entity, results)
             print("HERE ")
@@ -71,13 +71,15 @@ local function newResults() return {
     wages = 0,
     cleaned = 0,
     income = 0,
-     bonus = 0
+    bonus = 0,
+    dirt = 0
 }
 end
 
 local renderOrder = {
     { key = "arrested", name = "Arrested" },
     { key = "cleaned", name = "Cleaned" },
+    { key = "dirt", name = "New Dirt" },
 
 }
 
@@ -131,6 +133,7 @@ return function()
                     roleFunctions.hidden[v](w, results)
                 end
                 for k, w in pairs(F["active" .. v]) do
+                    print(v)
                     roleFunctions.active[v](w, results)
                 end
             end
