@@ -14,7 +14,10 @@ return function(scum)
             local t = event.otime - event.timeLeft
             local T = event.otime
             local stationPosition = GET(scum.station).position
-            love.graphics.print("Agent arrested", stationPosition.x , stationPosition.y + 160)
+            love.graphics.setColor(0.7,0.7,0.7)
+            love.graphics.rectangle("fill", stationPosition.x-100 , stationPosition.y + 100, 200,100)
+            love.graphics.setColor(1,1,1)
+            love.graphics.print("Agent arrested", stationPosition.x-80 , stationPosition.y + 160)
         end,
         initialize = function()
 

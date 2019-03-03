@@ -14,7 +14,10 @@ return function(station)
             local t = event.otime - event.timeLeft
             local T = event.otime
             local stationPosition = station.position
-            love.graphics.print("Station Cleaned", stationPosition.x , stationPosition.y + 160)
+            love.graphics.setColor(0.7,0.7,0.7)
+            love.graphics.rectangle("fill", stationPosition.x-200 , stationPosition.y + 100, 400,100)
+            love.graphics.setColor(1,1,1)
+            love.graphics.print("Station Cleaned", stationPosition.x-180 , stationPosition.y + 130)
         end,
         initialize = function()
 
