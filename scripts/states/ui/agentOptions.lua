@@ -12,7 +12,7 @@ local getActions = {
     },
     employeet = {'delete'},
     bombthreat = {'delete'},
-    spotter = { 'hidden','delete' },
+    spotter = { 'delete' },
     graffiti = {'hidden', 'delete'},
     musician = {'hidden', 'delete'}
 }

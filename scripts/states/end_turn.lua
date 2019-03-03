@@ -26,8 +26,7 @@ local adders
 local roleFunctions = {
     hidden = {
         pickpocket = function(entity, results)
-            local station = GET(entity.station)
-            adders.add_crime(station, 1500)
+
         end,
         employeet = function(entity, results)
         end,
@@ -35,25 +34,35 @@ local roleFunctions = {
         end,
         spotter = function(entity, results)
             print("DOES NOTHING")
-            local station = GET(entity.station)
-            adders.add_crime(station, 1500)
         end,
         graffiti = function(entity, results)
         end,
         musician = function(entity, results)
+
+            print("WRONG")
         end,
     },
     active = {
-        pickpocket = function(entity, results) end,
+        pickpocket = function(entity, results)
+            local station = GET(entity.station)
+            adders.add_crime(station, 15)
+        end,
         employeet = function(entity, results) end,
         bombthreat = function(entity, results) end,
         spotter = function(entity, results)
             print("DOES NOTHING ACTIVELY")
         end,
-        graffiti = function(entity, results) end,
-        musician = function(entity, results)
+        graffiti = function(entity, results)
+
             local station = GET(entity.station)
-            results.income = results.income  + math.max(0,station.pauper-50)/10
+            station.dirt = station.dirt + 1
+        end,
+        musician = function(entity, results)
+            print("HERE ")
+            local station = GET(entity.station)
+            results.income = results.income  + math.max(0,25-station.pauper)/5
+            adders.add_crime(station, 1)
+
         end,
     }
 }
@@ -72,7 +81,8 @@ local function newResults() return {
     activegraffiti = 0,
     activemusician = 0,
     wages = 0,
-    income = 0
+    income = 0,
+     bonus = 0
 }
 end
 
@@ -83,6 +93,7 @@ local renderOrder = {
 local renderFinancial = {
     { key = "income", name = "Income" },
     { key = "wages", name = "Wages" },
+    { key = "bonus", name = "Bonus" },
 }
 
 local results = {}
@@ -120,6 +131,7 @@ return function()
         enter = function()
             for k, v in pairs(F.station) do
                 v.disabled = nil
+                v.pauper = math.max(0,v.pauper - 5)
             end
             for _, v in pairs(roles) do
 
@@ -127,7 +139,7 @@ return function()
                     roleFunctions.hidden[v](w, results)
                 end
                 for k, w in pairs(F["active" .. v]) do
-                    roleFunctions.hidden[v](w, results)
+                    roleFunctions.active[v](w, results)
                 end
             end
 
@@ -135,6 +147,16 @@ return function()
                 local costs = COSTSPERUNIT[v.isPiece]
                 adders.add_money(-costs[2])
                 results.wages = results.wages + costs[2]
+            end
+
+            for i=1, #BONUSES do
+                if i > GLOBALSTATS.lastBonus then
+                    if BONUSES[i][1] <= GLOBALSTATS.crime then
+                        adders.add_money(BONUSES[i][2])
+                        results.bonus = results.bonus +  BONUSES[i][2]
+                        GLOBALSTATS.lastBonus = i
+                    end
+                end
             end
         end,
         leave = function()
