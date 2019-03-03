@@ -24,11 +24,11 @@ end
 
 return function(x,y, agent_name)
     INFOS = {
-        pickpocket = getInfo('pickpocket', 'Pickpocket', 'Causes nuisance'),
-        employeet = getInfo('employeet', 'Employeet', 'Causes nuisance'),
-        bombthreat = getInfo('bombthreat', 'Bombthreat', 'Causes nuisance'),
-        spotter =getInfo('spotter', 'Spotter', 'Causes nuisance'),
-        graffiti = getInfo('graffiti', 'Graffiti', 'Causes nuisance'),
+        pickpocket = getInfo('pickpocket', 'Pickpocket', 'Steals wallets'),
+        employeet = getInfo('employeet', 'Employeet', 'Yeets someone'),
+        bombthreat = getInfo('bombthreat', 'Bombthreat', 'A suspicious bag'),
+        spotter =getInfo('spotter', 'Spotter', 'Looks at trains'),
+        graffiti = getInfo('graffiti', 'Graffiti', 'Wonderful art'),
         musician = getInfo('musician', 'Musician', 'Causes nuisance'),
     }
     local hovers = false
