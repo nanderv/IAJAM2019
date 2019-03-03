@@ -70,6 +70,8 @@ function LOADASSETS()
     RESOURCES.wagon3 = {}
     RESOURCES.skipButton = love.graphics.newImage('assets/processed/u1m1@16x.png')
     RESOURCES.playButton = love.graphics.newImage('assets/processed/u2m1@16x.png')
+    RESOURCES.arrested = love.graphics.newImage('assets/processed/u3m1@16x.png')
+    RESOURCES.cleaned = love.graphics.newImage('assets/processed/u4m1@16x.png')
     RESOURCES.music = love.audio.newSource('assets/Music/Electric Underground.ogg', 'stream')
     RESOURCES.soundEffects = {}
 
