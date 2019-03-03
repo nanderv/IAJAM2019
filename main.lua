@@ -30,10 +30,10 @@ BONUSES = {
 COSTSPERUNIT = {
     pickpocket = { 10, 7 },
     employeet = { 100000, 100000 },
-    bombthreat = {30, 19 },
+    bombthreat = { 30, 19 },
     spotter = { 1, 1 },
     graffiti = { 5, 3 },
-    musician ={ 3, 2 },
+    musician = { 3, 2 },
 }
 local roles = {
     'police',
@@ -53,7 +53,7 @@ local actions = {
 }
 
 GLOBALSTATS = {
-    money = 200,
+    money = 100,
     crime = 0,
     goal = 1000,
     lastBonus = 0,
@@ -64,16 +64,17 @@ function LOADASSETS()
     RESOURCES.roles = {}
     RESOURCES.roles2 = {}
     RESOURCES.action = {}
+    RESOURCES.startScreen = love.graphics.newImage('assets/processed/u6l1@4x.png')
 
 
     RESOURCES.colours = {
-        r = { r = 237, g = 85, b = 59},
-        y = { r = 242, g = 177, b = 52},
-        g = { r = 71, g = 171, b = 108},
-        c = { r = 8, g = 148, b = 161},
-        b = { r = 17, g = 47, b = 65}
+        r = { r = 237, g = 85, b = 59 },
+        y = { r = 242, g = 177, b = 52 },
+        g = { r = 71, g = 171, b = 108 },
+        c = { r = 8, g = 148, b = 161 },
+        b = { r = 17, g = 47, b = 65 }
     }
-    for k,v in pairs(RESOURCES.colours) do
+    for k, v in pairs(RESOURCES.colours) do
         v.r = v.r / 255
         v.g = v.g / 255
         v.b = v.b / 255
@@ -108,6 +109,8 @@ function addStates()
     state.addState("add_agent", scripts.states.add_agent())
 
     state.addState("load_map", scripts.states.load_map())
+
+    state.addState("load_menu", scripts.states.load_menu())
 end
 
 function love.load()
@@ -119,7 +122,7 @@ function love.load()
     CAM:setScale(0.01)
     love.graphics.setFont(font)
 
-    state.setState("load_map")
+    state.setState("load_menu")
 end
 
 function love.update(dt)
@@ -132,21 +135,23 @@ function love.draw()
     love.graphics.rectangle("fill", 0, 0, 10000, 10000)
     love.graphics.setColor(1, 1, 1)
     state.draw()
-    love.graphics.setColor(0,0,0.7)
-    love.graphics.rectangle("fill", 0,0,2000,50)
-    love.graphics.setColor(1,1,1)
-    love.graphics.print("€ " .. tostring (GLOBALSTATS.money), 10, 10)
-    love.graphics.print("CRIME = " .. tostring (GLOBALSTATS.crime).."OF " .. tostring (GLOBALSTATS.goal), 300, 10)
+    if (not MYSTATE.currentState == "load_menu") then
+        love.graphics.setColor(0, 0, 0.7)
+        love.graphics.rectangle("fill", 0, 0, 2000, 50)
+        love.graphics.setColor(1, 1, 1)
+        love.graphics.print("€ " .. tostring(GLOBALSTATS.money), 10, 10)
+        love.graphics.print("CRIME = " .. tostring (GLOBALSTATS.crime).."OF " .. tostring (GLOBALSTATS.goal), 300, 10)
 
-    local bonus;
-    for k,v in ipairs(BONUSES) do
-        if v[1] > GLOBALSTATS.crime then
-            bonus = v
-            break
+        local bonus;
+        for k, v in ipairs(BONUSES) do
+            if v[1] > GLOBALSTATS.crime then
+                bonus = v
+                break
+            end
         end
-    end
-    if bonus then
-        love.graphics.print("Next bonus: € " .. tostring (bonus[2]) .. " at CRIME = "..bonus[1], 700, 10)
+        if bonus then
+            love.graphics.print("Next bonus: € " .. tostring(bonus[2]) .. " at CRIME = " .. bonus[1], 700, 10)
+        end
     end
 end
 
