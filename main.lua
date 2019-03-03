@@ -65,6 +65,8 @@ function LOADASSETS()
     RESOURCES.roles2 = {}
     RESOURCES.action = {}
     RESOURCES.startScreen = love.graphics.newImage('assets/processed/u6l1@4x.png')
+    RESOURCES.winScreen = love.graphics.newImage('assets/processed/u8l1@4x.png')
+    RESOURCES.lossScreen = love.graphics.newImage('assets/processed/u7l1@4x.png')
     RESOURCES.wagon = {}
     RESOURCES.wagon2 = {}
     RESOURCES.wagon3 = {}
