@@ -8,6 +8,7 @@
 local funcs = {}
 function funcs.add_crime(station, amount)
     station.pauper = station.pauper + amount
+    print(station.pauper)
     GLOBALSTATS.crime = GLOBALSTATS.crime + amount
     if station.pauper > 30 then
         core.entity.add(scripts.entities.police(station.ID, {}))
