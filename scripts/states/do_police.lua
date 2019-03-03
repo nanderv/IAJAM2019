@@ -16,6 +16,7 @@ local scumValues = {
 }
 
 local function arrest(scum)
+    RR.arrested = RR.arrested + 1
     local stationPosition = GET(scum.station).position
     local act = scripts.render.renderActions.moveCameraTo(stationPosition)
     scripts.render.actions.add(1, act.draw, act.initialize)
@@ -38,7 +39,10 @@ local function get_metro(police)
 end
 
 local function clean(station)
-
+    RR.cleaned = RR.cleaned + 1
+    station.dirt = 0
+    local act = scripts.render.renderActions.moveCameraTo(station.position)
+    scripts.render.actions.add(1, act.draw, act.initialize)
     local act = scripts.render.renderActions.renderCleaning(station)
     scripts.render.actions.add(5, act.draw, act.initialize)
 end

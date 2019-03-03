@@ -68,19 +68,8 @@ local roleFunctions = {
 }
 local function newResults() return {
     arrested = 0,
-    hiddenpickpocket = 0,
-    hiddenemployeet = 0,
-    hiddenbombthreat = 0,
-    hiddenspotter = 0,
-    hiddengraffiti = 0,
-    hiddenmusician = 0,
-    activepickpocket = 0,
-    activeemployeet = 0,
-    activebombthreat = 0,
-    activespotter = 0,
-    activegraffiti = 0,
-    activemusician = 0,
     wages = 0,
+    cleaned = 0,
     income = 0,
      bonus = 0
 }
@@ -88,6 +77,8 @@ end
 
 local renderOrder = {
     { key = "arrested", name = "Arrested" },
+    { key = "cleaned", name = "Cleaned" },
+
 }
 
 local renderFinancial = {
@@ -100,6 +91,7 @@ local results = {}
 
 return function()
     results = newResults()
+    RR = results
 
     adders = scripts.systems.simulate.adders
     return {

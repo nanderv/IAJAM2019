@@ -14,7 +14,7 @@ return function(station)
             local t = event.otime - event.timeLeft
             local T = event.otime
             local stationPosition = station.position
-            love.graphics.print("Agent arrested", stationPosition.x , stationPosition.y + 160)
+            love.graphics.print("Station Cleaned", stationPosition.x , stationPosition.y + 160)
         end,
         initialize = function()
 
