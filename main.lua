@@ -65,6 +65,9 @@ function LOADASSETS()
     RESOURCES.roles2 = {}
     RESOURCES.action = {}
     RESOURCES.startScreen = love.graphics.newImage('assets/processed/u6l1@4x.png')
+    RESOURCES.wagon = {}
+    RESOURCES.wagon2 = {}
+    RESOURCES.wagon3 = {}
 
 
     RESOURCES.colours = {
@@ -93,6 +96,15 @@ function LOADASSETS()
     end
     for k, v in ipairs(colours) do
         RESOURCES.diamond[v] = love.graphics.newImage('assets/processed/x1' .. v .. '@16x.png')
+    end
+    for k, v in ipairs(colours) do
+        RESOURCES.wagon[v] = love.graphics.newImage('assets/processed/w1' .. v .. '@16x.png')
+    end
+    for k, v in ipairs(colours) do
+        RESOURCES.wagon2[v] = love.graphics.newImage('assets/processed/w2' .. v .. '@16x.png')
+    end
+    for k, v in ipairs(colours) do
+        RESOURCES.wagon3[v] = love.graphics.newImage('assets/processed/w3' .. v .. '@16x.png')
     end
     pprint(RESOURCES)
 end
