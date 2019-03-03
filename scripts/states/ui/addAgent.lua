@@ -91,22 +91,11 @@ return function()
                 end
             end
         end,
-        draw = function()
-            local agent = UIDATASTATE.GET({ "agent" })
-            if agent then
-                local xx, yy
-                if agent.action.train then
-                    xx, yy = GETMETROSPOT(GET(agent.action.train), agent.spot)
-                else
-                    xx, yy = GETSPOT(GET(agent.station), agent.spot)
-                end
-                CAM:draw(function()
-                    love.graphics.setColor(1, 0, 0)
-                    love.graphics.circle('line', xx, yy, P.agentSize + 1)
+        elements={
 
-                    love.graphics.setColor(1, 1, 1)
-                end)
-            end
+        },
+        draw = function()
+            RENDERINFO(UIDATASTATE.GET({'new_agenttype'}))
         end
     }
 end

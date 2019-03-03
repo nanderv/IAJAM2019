@@ -13,7 +13,6 @@
 -- Time: 21:57
 -- To change this template use File | Settings | File Templates.
 --
-font = love.graphics.newFont( 64 )
 local dist = function(pos1, pos2)
     local xd = (pos1.x - pos2.x)
     local yd = (pos1.y - pos2.y)
@@ -36,7 +35,6 @@ return function()
             if hovers then
                 love.graphics.setColor(1-hovers.pauper/100, 1-hovers.pauper/100, 1-hovers.pauper/100)
                 CAM:draw(function()
-                    love.graphics.setFont(font)
                     love.graphics.circle('fill', hovers.position.x, hovers.position.y, 100)
 
 

@@ -98,6 +98,7 @@ return function()
         draw = function()
             local agent = UIDATASTATE.GET({ "agent" })
             if agent then
+                RENDERINFO(agent.isPiece)
                 local xx, yy
                 if agent.action.train then
                     xx, yy = GETMETROSPOT(GET(agent.action.train), agent.spot)
