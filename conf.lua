@@ -1,5 +1,5 @@
 love.conf = function(t)
-    t.title = "Fluffy the Porcupine Saves the World"
+    t.title = "Don't Mind the Gap"
     t.version = "11.2"
     t.window.width = 1920
     t.window.height = 1080
