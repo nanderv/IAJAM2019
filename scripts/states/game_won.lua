@@ -12,7 +12,7 @@ return function()
         draw = function()
             CAM:draw(function()
                 local scale = 10
-                love.graphics.draw(RESOURCES.winScreen, 0, -200, 0, scale, scale, 0, 0)
+                love.graphics.draw(RESOURCES.winScreen, 0, 500, 0, scale, scale, 0, 0)
             end)
         end,
         keypressed = function(key, scancode, isRepeat)
@@ -20,7 +20,7 @@ return function()
                 local isFullscreen, fstype = love.window.getFullscreen()
                 love.window.setFullscreen(not isFullscreen)
             else
-                love.setState("load_menu")
+                MYSTATE.setState("load_menu")
             end
         end,
         mousePressed = function()

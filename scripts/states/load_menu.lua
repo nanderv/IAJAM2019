@@ -19,11 +19,11 @@ return function()
                 local isFullscreen, fstype = love.window.getFullscreen()
                 love.window.setFullscreen(not isFullscreen)
             else
-                MYSTATE.setState("load_map")
+                MYSTATE.setState("tutorial")
             end
         end,
         mousePressed = function()
-            MYSTATE.setState("load_map")
+            MYSTATE.setState("tutorial")
         end,
     }
 end
