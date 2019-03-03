@@ -6,7 +6,7 @@ local state = require 'lib.UI.handling'
 MYSTATE = state
 require 'lib.UI.ui_data_state'
 local gamera = require 'lib.gamera'
-CAM = gamera.new(0, 0, 9600, 9600)
+CAM = gamera.new(-200, -200, 9600, 9600)
 font = love.graphics.newFont( 32 )
 
 P = {}
@@ -19,13 +19,19 @@ local colours = {
     'c',
     'b'
 }
+
+BONUSES = {
+    { 10, 100},
+    { 500, 200},
+    { 700, 200 }
+}
 COSTSPERUNIT = {
-    pickpocket = { 2, 1 },
-    employeet = { 2, 1 },
-    bombthreat = { 2, 1 },
-    spotter = { 2, 1 },
-    graffiti = { 2, 1 },
-    musician ={ 2, 1 },
+    pickpocket = { 10, 7 },
+    employeet = { 100000, 100000 },
+    bombthreat = {30, 19 },
+    spotter = { 1, 1 },
+    graffiti = { 5, 3 },
+    musician ={ 3, 2 },
 }
 local roles = {
     'police',
@@ -45,8 +51,10 @@ local actions = {
 }
 
 GLOBALSTATS = {
-    money = 1000,
+    money = 100,
     crime = 0,
+    goal = 1000,
+    lastBonus = 0,
 }
 function LOADASSETS()
     RESOURCES.station = {}
@@ -122,8 +130,22 @@ function love.draw()
     love.graphics.rectangle("fill", 0, 0, 10000, 10000)
     love.graphics.setColor(1, 1, 1)
     state.draw()
-
+    love.graphics.setColor(0,0,0.7)
+    love.graphics.rectangle("fill", 0,0,2000,50)
+    love.graphics.setColor(1,1,1)
     love.graphics.print("€ " .. tostring (GLOBALSTATS.money), 10, 10)
+    love.graphics.print("CRIME = " .. tostring (GLOBALSTATS.crime), 300, 10)
+    love.graphics.print("OF " .. tostring (GLOBALSTATS.goal), 480, 10)
+    local bonus;
+    for k,v in ipairs(BONUSES) do
+        if v[1] > GLOBALSTATS.crime then
+            bonus = v
+            break
+        end
+    end
+    if bonus then
+        love.graphics.print("Next bonus: € " .. tostring (bonus[2]) .. " at CRIME = "..bonus[1], 700, 10)
+    end
 end
 
 function love.mousepressed(x, y, button)
