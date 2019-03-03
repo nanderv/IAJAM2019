@@ -7,6 +7,7 @@ MYSTATE = state
 require 'lib.UI.ui_data_state'
 local gamera = require 'lib.gamera'
 CAM = gamera.new(0, 0, 9600, 9600)
+font = love.graphics.newFont( 32 )
 
 P = {}
 P.agentSize = 40
@@ -103,6 +104,8 @@ function love.load()
     UIDATASTATE.PUT({ "scrol" }, { x = 0, y = 0, zoom = 1 })
     UIDATASTATE.PUT({ "map" }, "map1")
     CAM:setScale(0.01)
+    love.graphics.setFont(font)
+
     state.setState("load_map")
 end
 
@@ -116,6 +119,8 @@ function love.draw()
     love.graphics.rectangle("fill", 0, 0, 10000, 10000)
     love.graphics.setColor(1, 1, 1)
     state.draw()
+
+    love.graphics.print("€ " .. tostring (GLOBALSTATS.money), 10, 10)
 end
 
 function love.mousepressed(x, y, button)

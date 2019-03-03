@@ -44,6 +44,7 @@ return function()
         end,
         elements = {
             scripts.states.ui.addAgent(1620, 980),
+            scripts.states.ui.cancelAddAgent(1620, 980),
 
             scripts.states.ui.end_turn_button(1620, 980),
 

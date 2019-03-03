@@ -14,7 +14,8 @@ local getActions = {
     employeet = {},
     bombthreat = {},
     spotter = { 'delete' },
-    graffiti = {}
+    graffiti = {},
+    musician = {}
 }
 
 local functions = {
