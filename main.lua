@@ -65,11 +65,16 @@ function LOADASSETS()
     RESOURCES.roles2 = {}
     RESOURCES.action = {}
     RESOURCES.startScreen = love.graphics.newImage('assets/processed/u6l1@4x.png')
+    RESOURCES.lossScreen = love.graphics.newImage('assets/processed/u7l1@4x.png')
+    RESOURCES.winScreen = love.graphics.newImage('assets/processed/u8l1@4x.png')
+    RESOURCES.tutorialScreen = love.graphics.newImage('assets/processed/u9l1@4x.png')
     RESOURCES.wagon = {}
     RESOURCES.wagon2 = {}
     RESOURCES.wagon3 = {}
     RESOURCES.skipButton = love.graphics.newImage('assets/processed/u1m1@16x.png')
     RESOURCES.playButton = love.graphics.newImage('assets/processed/u2m1@16x.png')
+    RESOURCES.arrested = love.graphics.newImage('assets/processed/u3m1@16x.png')
+    RESOURCES.cleaned = love.graphics.newImage('assets/processed/u4m1@16x.png')
     RESOURCES.music = love.audio.newSource('assets/Music/Electric Underground.ogg', 'stream')
     RESOURCES.soundEffects = {}
 
@@ -132,10 +137,11 @@ function addStates()
     state.addState("end_turn", scripts.states.end_turn())
     state.addState("do_police", scripts.states.do_police())
     state.addState("add_agent", scripts.states.add_agent())
-
     state.addState("load_map", scripts.states.load_map())
-
     state.addState("load_menu", scripts.states.load_menu())
+    state.addState("game_over", scripts.states.game_lost())
+    state.addState("victory", scripts.states.game_won())
+    state.addState("tutorial", scripts.states.tutorial())
 end
 
 function love.load()
@@ -164,7 +170,8 @@ function love.draw()
     love.graphics.setColor(1, 1, 1)
     state.draw()
     print(MYSTATE.currentState)
-    if (MYSTATE.currentState ~= "load_menu") then
+    if (MYSTATE.currentState ~= "load_menu" and MYSTATE.currentState ~= "victory" and MYSTATE.currentState ~=
+            "game_over" and MYSTATE.currentState ~= "tutorial") then
         love.graphics.setColor(0, 0, 0.7)
         love.graphics.rectangle("fill", 0, 0, 2000, 50)
         love.graphics.setColor(1, 1, 1)

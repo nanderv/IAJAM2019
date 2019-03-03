@@ -17,7 +17,7 @@ return function(scum)
             love.graphics.setColor(0.7,0.7,0.7)
             love.graphics.rectangle("fill", stationPosition.x-100 , stationPosition.y + 100, 200,100)
             love.graphics.setColor(1,1,1)
-            love.graphics.print("Agent arrested", stationPosition.x-80 , stationPosition.y + 160)
+            love.graphics.draw(RESOURCES.arrested, stationPosition.x-80 , stationPosition.y + 160)
         end,
         initialize = function()
 
