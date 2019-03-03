@@ -80,7 +80,21 @@ state.update = function(dt)
     state.updateState(state.currentState, dt)
 end
 
-state.keypressed = function(key, scanCode, isRepeat)
+state.keypressedState = function(stateName, key, scanCode, isRepeat)
+    local myState = state.UIStates[stateName]
+    if myState.prevState then
+        state.keypressedState(myState.prevState, key, scanCode, isRepeat)
+    end
+    if myState.elements then
+        for k, v in ipairs(myState.elements) do
+            if v.keypressed then
+                v.keypressed(key, scanCode, isRepeat)
+            end
+        end
+    end
+    if myState and myState.keypressed then
+        myState.keypressed(key, scanCode, isRepeat)
+    end
 end
 
 state.keyreleased = function(key, scanCode)
@@ -120,6 +134,10 @@ state.mouseReleasedState = function(stateName, x, y, button, istouch, presses)
             end
         end
     end
+end
+
+state.keypressed = function(key, scanCode, isRepeat)
+    state.keypressedState(state.currentState, key, scanCode, isRepeat)
 end
 
 state.mousePressed = function(x, y, button, istouch, presses)
