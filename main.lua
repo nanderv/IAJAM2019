@@ -161,7 +161,8 @@ function love.draw()
     love.graphics.rectangle("fill", 0, 0, 10000, 10000)
     love.graphics.setColor(1, 1, 1)
     state.draw()
-    if (not MYSTATE.currentState == "load_menu") then
+    print(MYSTATE.currentState)
+    if (MYSTATE.currentState ~= "load_menu") then
         love.graphics.setColor(0, 0, 0.7)
         love.graphics.rectangle("fill", 0, 0, 2000, 50)
         love.graphics.setColor(1, 1, 1)
